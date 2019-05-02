@@ -11,7 +11,7 @@ Name::Name(std::string name) {
         throw ParseExn("Invalid name " + name + ": first letter must be alphabetic or underscore");
     }
 
-    for (int i = 1; i < name.length(); i++) {
+    for (size_t i = 1; i < name.length(); i++) {
         if (!isalnum(name[i]) && name[i] != '_') {
             throw ParseExn("Invalid name " + name + ": letters after the first must be alphanumeric or underscore");
         }
@@ -20,6 +20,12 @@ Name::Name(std::string name) {
     this->name = name;
 }
 
-std::string Name::getName() {
+bool Name::operator==(const Name &other) const {
+    return this->name == other.name;
+}
+
+
+std::string Name::getName() const {
     return name;
 }
+

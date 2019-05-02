@@ -19,7 +19,7 @@ TEST_CASE("Test Name construction") {
         "z_y_x_w_3_V_U" // All character types
     };
 
-    for (int i = 0; i < good.size(); i++) {
+    for (size_t i = 0; i < good.size(); i++) {
         Name name(good[i]);
         REQUIRE(name.getName() == good[i]);
     }
@@ -41,7 +41,7 @@ TEST_CASE("Test Name construction") {
         "var \t",
     };
 
-    for (int i = 0; i < bad.size(); i++) {
+    for (size_t i = 0; i < bad.size(); i++) {
         REQUIRE_THROWS_AS(Name(bad[i]), ParseExn);
     }
 }

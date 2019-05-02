@@ -13,7 +13,15 @@ public:
      * converted. All numbers are non-negative hexadecimal.
      */
     Number(std::string number_s);
+    /**
+     * Construct a number directly.
+     */
+    Number(number_t number);
+
     number_t getNumber();
+
+    bool operator==(const Number&) const;
+
 private:
     number_t number;
 };

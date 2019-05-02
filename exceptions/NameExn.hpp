@@ -2,9 +2,9 @@
 #include <exception>
 #include <string>
 
-class ParseExn : public std::exception {
+class NameExn : public std::exception {
 public:
-    ParseExn(std::string msg);
+    NameExn(std::string msg);
     const char* what() const noexcept;
 private:
     std::string msg;

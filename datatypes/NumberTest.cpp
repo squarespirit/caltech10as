@@ -18,7 +18,7 @@ TEST_CASE("Test Number construction") {
         {"FFFF",    0xFFFF}
     };
 
-    for (int i = 0; i < good.size(); i++) {
+    for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(Number(good[i].first).getNumber() == good[i].second);
     }
 
@@ -36,7 +36,7 @@ TEST_CASE("Test Number construction") {
         "qwerty"
     };
 
-    for (int i = 0; i < bad.size(); i++) {
+    for (size_t i = 0; i < bad.size(); i++) {
         REQUIRE_THROWS_AS(Number(bad[i]), ParseExn);
     }
 }

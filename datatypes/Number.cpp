@@ -37,6 +37,15 @@ Number::Number(std::string s) {
     }
 }
 
+Number::Number(number_t n) {
+    number = n;
+}
+
 number_t Number::getNumber() {
     return number;
 }
+
+bool Number::operator==(const Number &other) const {
+    return this->number == other.number;
+}
+
