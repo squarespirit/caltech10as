@@ -17,9 +17,9 @@ public:
     OrgOp(Symbol programAddress);
 
     /**
-     * Apply this OrgOp to the provided context, by setting the context's 
-     * program address to the value of the symbol.
-     * Throw an AddressRangeExn if the program address is out of range.
+     * Apply this OrgOp to the provided context, by updating its program
+     * address.
+     * Throw an AddressRangeExn if the new address is out of range.
      */
     void apply(Context &c);
 
