@@ -27,7 +27,7 @@ Number::Number(std::string s) {
     }
 
     number = 0;
-    for (int i = 0; i < s.length(); i++) {
+    for (size_t i = 0; i < s.length(); i++) {
         number <<= 4;
         int digit = hexToInt(s[i]);
         if (digit == -1) {
