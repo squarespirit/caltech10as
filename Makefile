@@ -5,15 +5,17 @@ EXECS=TestMain
 
 CONTEXT_OBJS = context/Context.o
 CONTEXT_TEST_OBJS = context/ContextTest.o
-DATATYPES_OBJS = datatypes/Name.o datatypes/Number.o datatypes/Symbol.o datatypes/Register.o datatypes/IncDecSpec.o
-DATATYPES_TEST_OBJS = datatypes/NameTest.o datatypes/NumberTest.o datatypes/SymbolTest.o
-EXCEPTION_OBJS = exceptions/NameExn.o exceptions/ParseExn.o
-LINE_OBJS = line/LabelDef.o
-LINE_TEST_OBJS = line/LabelDefTest.o
-TEST_OBJS = test/TestMain.o
+DATATYPES_OBJS = $(addprefix datatypes/, Name.o Number.o Symbol.o Register.o IncDecSpec.o)
+DATATYPES_TEST_OBJS = $(addprefix datatypes/, NameTest.o NumberTest.o SymbolTest.o)
+EXCEPTION_OBJS = $(addprefix exceptions/, AddressRangeExn.o NameExn.o ParseExn.o)
+LINE_OBJS = $(addprefix line/, LabelDef.o)
+LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
+LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, OrgOp.o PseudoOp.o)
+LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, OrgOpTest.o)
+TEST_MAIN_OBJS = test/TestMain.o
 
-ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) $(LINE_OBJS)
-ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) $(TEST_OBJS)
+ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) $(LINE_OBJS) $(LINE_PSEUDOOPS_OBJS)
+ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) $(TEST_MAIN_OBJS)
 
 .PHONY: all test clean
 
@@ -22,6 +24,10 @@ all: $(EXECS)
 datatypes/%.o: datatypes/%.cpp
 
 exceptions/%.o: exceptions/%.cpp
+
+line/%.o: line/%.cpp
+
+line/pseudoops/%.o: line/pseudoops/%.cpp
 
 test/%.o: test/%.cpp
 

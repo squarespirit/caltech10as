@@ -33,8 +33,7 @@ TEST_CASE("Test LabelDef apply") {
     c.setCurProgramAddress(11);
     LabelDef(Name("lab2")).apply(c);
     REQUIRE(c.lookupLabel(Name("lab1")) == Number(1234));
-    c.lookupLabel(Name("lab2"));
-    // REQUIRE(c.lookupLabel(Name("lab2")) == Number(11));
+    REQUIRE(c.lookupLabel(Name("lab2")) == Number(11));
 
     // Apply a label that already exists.
     REQUIRE_THROWS_AS(LabelDef(Name("lab1")).apply(c), NameExn);
