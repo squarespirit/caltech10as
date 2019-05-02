@@ -13,7 +13,7 @@ exceptions/%.o: exceptions/%.cpp
 
 test/%.o: test/%.cpp
 
-TestMain: test/TestMain.o datatypes/NameTest.o datatypes/Name.o exceptions/ParseExn.o
+TestMain: test/TestMain.o datatypes/NameTest.o datatypes/Name.o datatypes/Number.o datatypes/NumberTest.o exceptions/ParseExn.o
 	$(CXX) $(LDFLAGS) -o $@ $^
 
 test: TestMain

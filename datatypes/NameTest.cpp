@@ -20,7 +20,8 @@ TEST_CASE("Test Name construction") {
     };
 
     for (int i = 0; i < good.size(); i++) {
-        REQUIRE_NOTHROW(Name(good[i]));
+        Name name(good[i]);
+        REQUIRE(name.getName() == good[i]);
     }
 
     std::vector<std::string> bad = {
