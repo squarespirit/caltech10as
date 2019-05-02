@@ -4,7 +4,7 @@ LDFLAGS=-g
 EXECS=TestMain
 
 CONTEXT_OBJS = context/Context.o
-DATATYPES_OBJS = datatypes/Name.o datatypes/Number.o datatypes/Symbol.o
+DATATYPES_OBJS = datatypes/Name.o datatypes/Number.o datatypes/Symbol.o datatypes/Register.o datatypes/IncDecSpec.o
 DATATYPES_TEST_OBJS = datatypes/NameTest.o datatypes/NumberTest.o datatypes/SymbolTest.o
 EXCEPTION_OBJS = exceptions/NameExn.o exceptions/ParseExn.o
 TEST_OBJS = test/TestMain.o
