@@ -15,7 +15,7 @@ std::unique_ptr<ConstOp> ConstOp::parseOp(std::string opcode, std::vector<std::s
     if (operands.size() != 2) {
         throw ParseExn(".const must have 2 operands (got " + std::to_string(operands.size()) + ")");
     }
-    return std::unique_ptr<ConstOp>(new ConstOp(Name(operands[0]), Number(operands[1])));
+    return std::make_unique<ConstOp>(Name(operands[0]), Number(operands[1]));
 }
 
 bool ConstOp::operator==(const ConstOp &other) const {

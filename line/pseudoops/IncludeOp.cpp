@@ -17,7 +17,7 @@ std::unique_ptr<IncludeOp> IncludeOp::parseOp(std::string opcode, std::vector<st
     if (operands.size() != 1) {
         throw ParseExn(".include must have 1 operand (got " + std::to_string(operands.size()) + ")");
     }
-    return std::unique_ptr<IncludeOp>(new IncludeOp(operands[0]));
+    return std::make_unique<IncludeOp>(operands[0]);
 }
 
 bool IncludeOp::operator==(const IncludeOp &other) const {
