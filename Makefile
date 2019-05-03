@@ -5,9 +5,9 @@ EXECS=TestMain
 
 CONTEXT_OBJS = context/Context.o
 CONTEXT_TEST_OBJS = context/ContextTest.o
-DATATYPES_OBJS = $(addprefix datatypes/, Name.o Number.o Symbol.o Register.o IncDecSpec.o)
+DATATYPES_OBJS = $(addprefix datatypes/, Name.o Number.o NumberTypes.o Symbol.o Register.o IncDecSpec.o)
 DATATYPES_TEST_OBJS = $(addprefix datatypes/, NameTest.o NumberTest.o SymbolTest.o)
-EXCEPTION_OBJS = $(addprefix exceptions/, RangeExn.o NameExn.o ParseExn.o)
+EXCEPTION_OBJS = $(addprefix exceptions/, NameExn.o ParseExn.o RangeExn.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
 LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, DataOp.o OrgOp.o PseudoOp.o)

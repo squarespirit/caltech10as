@@ -34,7 +34,7 @@ TEST_CASE("Test DataOp parseOperation") {
 
 TEST_CASE("Test DataOp apply") {
     Context c;
-    c.setCurDataAddress(0x5);
+    c.setCurDataAddress((number_t) 0x5);
     c.addConstant(Name("const1"), Number(0x10));
     c.addConstant(Name("big"), Number(0xFFFF));
     

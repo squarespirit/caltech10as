@@ -1,6 +1,7 @@
 #include "Context.hpp"
 #include <stdexcept>
 #include "exceptions/NameExn.hpp"
+#include "exceptions/RangeExn.hpp"
 
 Context::Context() {
     labelMap = std::unordered_map<Name, Number>();
@@ -25,11 +26,11 @@ Number Context::lookupConstant(Name name) {
     }
 }
 
-program_address_t Context::getCurProgramAddress() {
+number_t Context::getCurProgramAddress() {
     return curProgramAddress;
 }
 
-data_address_t Context::getCurDataAddress() {
+number_t Context::getCurDataAddress() {
     return curDataAddress;
 }
 
@@ -45,11 +46,17 @@ void Context::addConstant(Name name, Number number) {
     }
 }
 
-void Context::setCurProgramAddress(program_address_t p) {
+void Context::setCurProgramAddress(number_t p) {
+    if (p >= PROGRAM_ADDRESS_SIZE) {
+        throw RangeExn("Program address " + toHexString(p) + " out of range");
+    }
     curProgramAddress = p;
 }
 
-void Context::setCurDataAddress(data_address_t d) {
+void Context::setCurDataAddress(number_t d) {
+    if (d >= DATA_ADDRESS_SIZE) {
+        throw RangeExn("Data address " + toHexString(d) + " out of range");
+    }
     curDataAddress = d;
 }
 

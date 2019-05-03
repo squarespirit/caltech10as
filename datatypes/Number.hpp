@@ -1,9 +1,7 @@
 #pragma once
 #include <string>
-#include <cstdint>
+#include "NumberTypes.hpp"
 
-/** The type of numbers. */
-typedef uint16_t number_t;
 #define NUMBER_MAX_DIGITS (sizeof(number_t) * 2)
 
 class Number {

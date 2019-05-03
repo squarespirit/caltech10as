@@ -2,7 +2,6 @@
 #include <string>
 #include <unordered_map>
 
-#include "datatypes/Addresses.hpp"
 #include "datatypes/Name.hpp"
 #include "datatypes/Number.hpp"
 
@@ -26,8 +25,11 @@ public:
      * defined.
      */
     Number lookupConstant(Name);
-    program_address_t getCurProgramAddress();
-    data_address_t getCurDataAddress();
+    /** Get current program address. */
+    number_t getCurProgramAddress();
+    /** Get current data address. */
+    number_t getCurDataAddress();
+
     /**
      * Add label. Throw a NameExn if the label is already defined.
      */
@@ -36,12 +38,20 @@ public:
      * Add constant. Throw a NameExn if the constant is already defined.
      */
     void addConstant(Name, Number);
-    void setCurProgramAddress(program_address_t);
-    void setCurDataAddress(data_address_t);
+    /**
+     * Set current program address. Throw RangeExn if the new address is out
+     * of range.
+     */
+    void setCurProgramAddress(number_t);
+    /**
+     * Set current data address. Throw RangeExn if the new address is out
+     * of range.
+     */
+    void setCurDataAddress(number_t);
 
 private:
     std::unordered_map<Name, Number> labelMap;
     std::unordered_map<Name, Number> constantMap;
-    program_address_t curProgramAddress;
-    data_address_t curDataAddress;
+    number_t curProgramAddress;
+    number_t curDataAddress;
 };

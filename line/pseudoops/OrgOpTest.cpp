@@ -4,6 +4,7 @@
 #include <tuple>
 #include "exceptions/NameExn.hpp"
 #include "exceptions/ParseExn.hpp"
+#include "exceptions/RangeExn.hpp"
 #include "context/Context.hpp"
 
 TEST_CASE("Test OrgOp parseOperation") {
@@ -48,5 +49,10 @@ TEST_CASE("Test OrgOp apply") {
     REQUIRE_THROWS_AS(
         OrgOp(Symbol(Name("const2"), std::optional<Number>())).apply(c),
         NameExn
+    );
+    // Number too large
+    REQUIRE_THROWS_AS(
+        OrgOp(Symbol(std::optional<Name>(), Number(0x2FFF))).apply(c),
+        RangeExn
     );
 }
