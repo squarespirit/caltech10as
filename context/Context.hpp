@@ -19,16 +19,16 @@ public:
     /**
      * Get the number of a label. Throw a NameExn if the label is not defined.
      */
-    Number lookupLabel(Name);
+    Number lookupLabel(Name) const;
     /**
      * Get the number of a constant. Throw a NameExn if the constant is not
      * defined.
      */
-    Number lookupConstant(Name);
+    Number lookupConstant(Name) const;
     /** Get current program address. */
-    number_t getCurProgramAddress();
+    number_t getCurProgramAddress() const;
     /** Get current data address. */
-    number_t getCurDataAddress();
+    number_t getCurDataAddress() const;
 
     /**
      * Add label. Throw a NameExn if the label is already defined.

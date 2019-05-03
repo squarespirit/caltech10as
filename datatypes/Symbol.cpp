@@ -26,7 +26,7 @@ Symbol Symbol::parse(std::string s) {
     return Symbol(std::optional<Name>(), Number(s));
 }
 
-number_t Symbol::resolve(Context c) {
+number_t Symbol::resolve(Context const &c) {
     if (bool(name)) {
         return c.lookupConstant(*name).getNumber();
     }

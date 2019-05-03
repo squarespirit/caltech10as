@@ -29,7 +29,7 @@ public:
      * Resolve the symbol to a number. If it is a literal Number, return
      * its value. Otherwise, if it is a Name, look it up in the context.
      */
-    number_t resolve(Context);
+    number_t resolve(const Context&);
 
     bool operator==(const Symbol&) const;
 

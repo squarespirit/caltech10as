@@ -10,7 +10,7 @@ Context::Context() {
     curDataAddress = 0;
 }
 
-Number Context::lookupLabel(Name name) {
+Number Context::lookupLabel(Name name) const {
     try {
         return labelMap.at(name);
     } catch (std::out_of_range) {
@@ -18,7 +18,7 @@ Number Context::lookupLabel(Name name) {
     }
 }
 
-Number Context::lookupConstant(Name name) {
+Number Context::lookupConstant(Name name) const {
     try {
         return constantMap.at(name);
     } catch (std::out_of_range) {
@@ -26,11 +26,11 @@ Number Context::lookupConstant(Name name) {
     }
 }
 
-number_t Context::getCurProgramAddress() {
+number_t Context::getCurProgramAddress() const {
     return curProgramAddress;
 }
 
-number_t Context::getCurDataAddress() {
+number_t Context::getCurDataAddress() const {
     return curDataAddress;
 }
 
