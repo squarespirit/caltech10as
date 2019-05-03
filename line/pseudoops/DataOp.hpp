@@ -18,7 +18,7 @@ public:
     /**
      * Apply this DataOp to the provided context, by updating the data
      * address.
-     * Throw an AddressRangeExn if the new address is out of range.
+     * Throw an RangeExn if the new address is out of range.
      */
     void apply(Context &c);
 

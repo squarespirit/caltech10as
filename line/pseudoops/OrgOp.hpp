@@ -19,7 +19,7 @@ public:
     /**
      * Apply this OrgOp to the provided context, by updating its program
      * address.
-     * Throw an AddressRangeExn if the new address is out of range.
+     * Throw a RangeExn if the new address is out of range.
      */
     void apply(Context &c);
 

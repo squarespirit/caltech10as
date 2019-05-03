@@ -1,7 +1,7 @@
 #include "OrgOp.hpp"
 #include <limits>
 #include "datatypes/Addresses.hpp"
-#include "exceptions/AddressRangeExn.hpp"
+#include "exceptions/RangeExn.hpp"
 #include "exceptions/ParseExn.hpp"
 
 OrgOp::OrgOp(Symbol programAddress) : programAddress(programAddress) {
@@ -11,7 +11,7 @@ void OrgOp::apply(Context &c) {
     number_t n = programAddress.resolve(c);
     if (n < std::numeric_limits<program_address_t>::min() 
             || n > std::numeric_limits<program_address_t>::max()) {
-        throw AddressRangeExn(".org address " + std::to_string(n) + " is outside program address space");
+        throw RangeExn(".org address " + std::to_string(n) + " is outside program address space");
     }
     c.setCurProgramAddress(n);
 }

@@ -2,7 +2,7 @@
 
 #include "DataOp.hpp"
 #include <tuple>
-#include "exceptions/AddressRangeExn.hpp"
+#include "exceptions/RangeExn.hpp"
 #include "exceptions/NameExn.hpp"
 #include "exceptions/ParseExn.hpp"
 #include "context/Context.hpp"
@@ -54,11 +54,11 @@ TEST_CASE("Test DataOp apply") {
     // Number too large
     REQUIRE_THROWS_AS(
         DataOp(Symbol(std::optional<Name>(), Number(0xABC))).apply(c),
-        AddressRangeExn
+        RangeExn
     );
     // Name maps to number that is too large
     REQUIRE_THROWS_AS(
         DataOp(Symbol(Name("big"), std::optional<Number>())).apply(c),
-        AddressRangeExn
+        RangeExn
     );
 }
