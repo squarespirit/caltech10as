@@ -14,25 +14,25 @@ TEST_CASE("Test DataOp apply") {
     
     // Good symbol
     // Good number
-    DataOp(Symbol(std::optional<Name>(), Number(0x15))).apply(c);
+    DataOp(Symbol(std::nullopt, Number(0x15))).apply(c);
     REQUIRE(c.getCurDataAddress() == 0x15);
     // Good name
-    DataOp(Symbol(Name("const1"), std::optional<Number>())).apply(c);
+    DataOp(Symbol(Name("const1"), std::nullopt)).apply(c);
     REQUIRE(c.getCurDataAddress() == 0x10);
 
     // Bad name
     REQUIRE_THROWS_AS(
-        DataOp(Symbol(Name("const2"), std::optional<Number>())).apply(c),
+        DataOp(Symbol(Name("const2"), std::nullopt)).apply(c),
         NameExn
     );
     // Number too large
     REQUIRE_THROWS_AS(
-        DataOp(Symbol(std::optional<Name>(), Number(0xABC))).apply(c),
+        DataOp(Symbol(std::nullopt, Number(0xABC))).apply(c),
         RangeExn
     );
     // Name maps to number that is too large
     REQUIRE_THROWS_AS(
-        DataOp(Symbol(Name("big"), std::optional<Number>())).apply(c),
+        DataOp(Symbol(Name("big"), std::nullopt)).apply(c),
         RangeExn
     );
 }

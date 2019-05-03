@@ -20,10 +20,10 @@ Symbol Symbol::parse(std::string s) {
     }
 
     if (s[0] == '$') {
-        return Symbol(Name(s.substr(1)), std::optional<Number>());
+        return Symbol(Name(s.substr(1)), std::nullopt);
     }
 
-    return Symbol(std::optional<Name>(), Number(s));
+    return Symbol(std::nullopt, Number(s));
 }
 
 number_t Symbol::resolve(Context const &c) {

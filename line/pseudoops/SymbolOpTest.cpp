@@ -9,8 +9,8 @@
 
 TEST_CASE("Test parseSymbolOp") {
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> byteops = {
-        {".byte",   {"0"},      Symbol(std::optional<Name>(), Number(0))},
-        {".byte",   {"$green"}, Symbol(Name("green"), std::optional<Number>())},
+        {".byte",   {"0"},      Symbol(std::nullopt, Number(0))},
+        {".byte",   {"$green"}, Symbol(Name("green"), std::nullopt)},
     };
     for (size_t i = 0; i < byteops.size(); i++) {
         REQUIRE(
@@ -20,8 +20,8 @@ TEST_CASE("Test parseSymbolOp") {
     }
 
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> dataops = {
-        {".data",    {"123"},    Symbol(std::optional<Name>(), Number(0x123))},
-        {".data",    {"$red"},   Symbol(Name("red"), std::optional<Number>())},
+        {".data",    {"123"},    Symbol(std::nullopt, Number(0x123))},
+        {".data",    {"$red"},   Symbol(Name("red"), std::nullopt)},
     };
     for (size_t i = 0; i < dataops.size(); i++) {
         REQUIRE(
@@ -31,8 +31,8 @@ TEST_CASE("Test parseSymbolOp") {
     }
 
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> orgops = {
-        {".org",    {"123"},    Symbol(std::optional<Name>(), Number(0x123))},
-        {".org",    {"$blue"},  Symbol(Name("blue"), std::optional<Number>())},
+        {".org",    {"123"},    Symbol(std::nullopt, Number(0x123))},
+        {".org",    {"$blue"},  Symbol(Name("blue"), std::nullopt)},
     };
     for (size_t i = 0; i < orgops.size(); i++) {
         REQUIRE(
