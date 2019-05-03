@@ -13,3 +13,7 @@ void ByteOp::apply(Context &c) {
     // Advance data address
     c.setCurDataAddress((c.getCurDataAddress() + 1) % DATA_ADDRESS_SIZE);
 }
+
+bool ByteOp::operator==(const ByteOp &other) const {
+    return dataValue == other.dataValue;
+}

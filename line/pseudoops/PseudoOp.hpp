@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "../Operation.hpp"
 #include "context/Context.hpp"
 
@@ -14,7 +15,7 @@ public:
      * Convert an opcode and operands to a PseudoOp. Throw a ParseExn if 
      * the conversion fails.
      */
-    static Operation parseOp(std::string opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<PseudoOp> parseOp(std::string opcode, std::vector<std::string> const &operands);
 
     /**
      * Apply this PseudoOp to the provided context. 

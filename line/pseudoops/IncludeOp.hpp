@@ -7,7 +7,7 @@
 /**
  * IncludeOp is a directive to read instructions from another assembly file.
  */
-class IncludeOp : PseudoOp {
+class IncludeOp : public PseudoOp {
 public:
     /**
      * Construct an IncludeOp with the given filename.

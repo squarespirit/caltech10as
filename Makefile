@@ -11,13 +11,13 @@ EXCEPTION_OBJS = $(addprefix exceptions/, NameExn.o ParseExn.o RangeExn.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
 LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, ByteOp.o ConstOp.o DataOp.o OrgOp.o IncludeOp.o PseudoOp.o SymbolOp.o)
-LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, ByteOpTest.o ConstOpTest.o DataOpTest.o IncludeOpTest.o OrgOpTest.o SymbolOpTest.o)
+LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, ByteOpTest.o ConstOpTest.o DataOpTest.o IncludeOpTest.o OrgOpTest.o PseudoOpTest.o SymbolOpTest.o)
 TEST_MAIN_OBJS = test/TestMain.o
 
 ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) $(LINE_OBJS) $(LINE_PSEUDOOPS_OBJS)
 ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) $(TEST_MAIN_OBJS)
 
-.PHONY: all test clean
+.PHONY: all test clean cloc
 
 all: $(EXECS)
 
@@ -36,6 +36,9 @@ TestMain: $(ALL_BUILD_OBJS) $(ALL_TEST_OBJS)
 
 test: TestMain
 	./TestMain
+
+cloc:
+	cloc --not-match-f=catch.hpp --exclude-dir=.vscode .
 
 clean:
 	# Delete object files

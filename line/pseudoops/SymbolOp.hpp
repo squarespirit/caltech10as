@@ -4,6 +4,12 @@
 #include "PseudoOp.hpp"
 
 /**
+ * Return if the given opcode is of an operation that can be parsed by
+ * parseSymbolOp.
+ */
+bool isValidSymbolOpcode(std::string opcode);
+
+/**
  * Many pseudo-ops have only one operand, which is a symbol.
  * parseSymbolOperation function parses all of them.
  * It returns a newly-allocated PseudoOp.

@@ -6,7 +6,7 @@
 /**
  * ByteOp writes the byte at the current data address.
  */
-class ByteOp : PseudoOp {
+class ByteOp : public PseudoOp {
 public:
     /**
      * Construct a ByteOp with the value to write.
@@ -20,6 +20,8 @@ public:
      * Throw a RangeExn if the value to write is out of range.
      */
     void apply(Context &c);
+
+    bool operator==(const ByteOp&) const;
 
 private:
     Symbol dataValue;

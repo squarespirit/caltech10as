@@ -1,12 +1,24 @@
 #include "test/catch.hpp"
 #include <memory>
 #include <tuple>
+#include "ByteOp.hpp"
 #include "DataOp.hpp"
 #include "OrgOp.hpp"
 #include "SymbolOp.hpp"
 #include "exceptions/ParseExn.hpp"
 
 TEST_CASE("Test parseSymbolOp") {
+    std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> byteops = {
+        {".byte",   {"0"},      Symbol(std::optional<Name>(), Number(0))},
+        {".byte",   {"$green"}, Symbol(Name("green"), std::optional<Number>())},
+    };
+    for (size_t i = 0; i < byteops.size(); i++) {
+        REQUIRE(
+            dynamic_cast<ByteOp&>(*parseSymbolOp(std::get<0>(byteops[i]), std::get<1>(byteops[i])))
+            == ByteOp(std::get<2>(byteops[i]))
+        );
+    }
+
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> dataops = {
         {".data",    {"123"},    Symbol(std::optional<Name>(), Number(0x123))},
         {".data",    {"$red"},   Symbol(Name("red"), std::optional<Number>())},
@@ -29,9 +41,9 @@ TEST_CASE("Test parseSymbolOp") {
         );
     }
 
-
     std::vector<std::pair<std::string, std::vector<std::string>>> bad = {
         {"data",    {"123"}}, // Bad opcode
+        {".include", {"hello"}},
         {".data",   {}}, // Wrong # operands
         {".org",    {"a", "b"}},
         {".data",   {"", "", ""}},

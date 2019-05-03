@@ -7,7 +7,7 @@
 /**
  * ConstOp defines a constant with a given value.
  */
-class ConstOp : PseudoOp {
+class ConstOp : public PseudoOp {
 public:
     /**
      * Construct a ConstOp with the given name and value.
