@@ -1,7 +1,6 @@
 #include "test/catch.hpp"
 
 #include "DataOp.hpp"
-#include <tuple>
 #include "exceptions/RangeExn.hpp"
 #include "exceptions/NameExn.hpp"
 #include "exceptions/ParseExn.hpp"
