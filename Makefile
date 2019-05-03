@@ -23,15 +23,7 @@ ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) $(
 
 all: $(EXECS)
 
-datatypes/%.o: datatypes/%.cpp
-
-exceptions/%.o: exceptions/%.cpp
-
-line/%.o: line/%.cpp
-
-line/pseudoops/%.o: line/pseudoops/%.cpp
-
-test/%.o: test/%.cpp
+# Use implicit .cpp -> .o rule to compile all .o files
 
 TestMain: $(ALL_BUILD_OBJS) $(ALL_TEST_OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $^
