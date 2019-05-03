@@ -10,8 +10,8 @@ DATATYPES_TEST_OBJS = $(addprefix datatypes/, NameTest.o NumberTest.o SymbolTest
 EXCEPTION_OBJS = $(addprefix exceptions/, NameExn.o ParseExn.o RangeExn.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
-LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, ByteOp.o ConstOp.o DataOp.o OrgOp.o PseudoOp.o SymbolOp.o)
-LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, ByteOpTest.o ConstOpTest.o DataOpTest.o OrgOpTest.o SymbolOpTest.o)
+LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, ByteOp.o ConstOp.o DataOp.o OrgOp.o IncludeOp.o PseudoOp.o SymbolOp.o)
+LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, ByteOpTest.o ConstOpTest.o DataOpTest.o IncludeOpTest.o OrgOpTest.o SymbolOpTest.o)
 TEST_MAIN_OBJS = test/TestMain.o
 
 ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) $(LINE_OBJS) $(LINE_PSEUDOOPS_OBJS)
