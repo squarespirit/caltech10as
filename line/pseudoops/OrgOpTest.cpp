@@ -7,30 +7,6 @@
 #include "exceptions/RangeExn.hpp"
 #include "context/Context.hpp"
 
-TEST_CASE("Test OrgOp parseOperation") {
-    std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> good = {
-        {".org",    {"123"},    Symbol(std::optional<Name>(), Number(0x123))},
-        {".org",    {"$red"},   Symbol(Name("red"), std::optional<Number>())},
-    };
-    for (size_t i = 0; i < good.size(); i++) {
-        REQUIRE(
-            OrgOp::parseOperation(std::get<0>(good[i]), std::get<1>(good[i]))
-            == OrgOp(std::get<2>(good[i]))
-        );
-    }
-
-    std::vector<std::pair<std::string, std::vector<std::string>>> bad = {
-        {"org",     {"123"}}, // Bad opcode
-        {".org",    {}}, // Wrong # operands
-        {".org",    {"a", "b"}},
-        {".org",    {"", "", ""}},
-        {".org",    {"FFGF"}}, // Bad symbol
-        {".org",    {"$r#d"}},
-    };
-    for (size_t i = 0; i < bad.size(); i++) {
-        REQUIRE_THROWS_AS(OrgOp::parseOperation(bad[i].first, bad[i].second), ParseExn);
-    }
-}
 
 TEST_CASE("Test OrgOp apply") {
     Context c;

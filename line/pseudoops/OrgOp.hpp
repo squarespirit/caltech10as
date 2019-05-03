@@ -8,7 +8,7 @@
 /**
  * OrgOp is a pseudo-op that updates the current program address.
  */
-class OrgOp : PseudoOp {
+class OrgOp : public PseudoOp {
 public:
     /**
      * Construct an OrgOp with a symbol representing the desired program
@@ -22,12 +22,6 @@ public:
      * Throw a RangeExn if the new address is out of range.
      */
     void apply(Context &c);
-
-    /**
-     * Convert an opcode and operands to an OrgOp.
-     * Throw a ParseExn if the operand cannot be parsed.
-     */
-    static OrgOp parseOperation(std::string opcode, std::vector<std::string> const &operands);
 
     bool operator==(const OrgOp&) const;
 

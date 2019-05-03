@@ -8,7 +8,7 @@
 /**
  * PseudoOp is a directive to the assembler.
  */
-class PseudoOp : Operation {
+class PseudoOp : public Operation {
 public:
     /**
      * Convert an opcode and operands to a PseudoOp. Throw a ParseExn if 
