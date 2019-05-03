@@ -1,11 +1,8 @@
 #pragma once
-#include <exception>
+#include <stdexcept>
 #include <string>
 
-class NameExn : public std::exception {
+class NameExn : public std::runtime_error {
 public:
     NameExn(std::string msg);
-    const char* what() const noexcept;
-private:
-    std::string msg;
 };

@@ -1,11 +1,5 @@
 #include "ParseExn.hpp"
 
-ParseExn::ParseExn(std::string msg) {
-    this->msg = msg;
+ParseExn::ParseExn(std::string msg) : std::runtime_error(msg) {
 }
-
-const char* ParseExn::what() const noexcept {
-    return msg.c_str();
-}
-
 
