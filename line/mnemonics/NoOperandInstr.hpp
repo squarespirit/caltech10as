@@ -22,7 +22,7 @@ public:
     static std::unique_ptr<NoOperandInstr> parseOp(std::string opcode, std::vector<std::string> const &operands);
 
     /**
-     * Convert this NoOperandInstr to machine code.
+     * Return the machine code of this NoOperandInstr.
      */
     uint16_t encode(Context const &c);
 

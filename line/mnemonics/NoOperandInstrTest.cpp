@@ -21,10 +21,16 @@ TEST_CASE("Test NoOperandInstr encode") {
     Context c;
 
     // Only good cases
-    // One of each type of instruction
-    REQUIRE(NoOperandInstr("NEG").encode(c) == 0x2700);
-    REQUIRE(NoOperandInstr("STI").encode(c) == 0x7F81);
-    REQUIRE(NoOperandInstr("TSA").encode(c) == 0x6700);    
-    REQUIRE(NoOperandInstr("POPF").encode(c) == 0x0200);
-    REQUIRE(NoOperandInstr("NOP").encode(c) == 0x1F80);
+    std::vector<std::pair<std::string, uint16_t>> good = {
+        // One of each type of instruction
+        {"NEG", 0x2700},
+        {"STI", 0x7F81},
+        {"TSA", 0x6700},
+        {"POPF", 0x0200},
+        {"NOP", 0x1F80}
+    };
+
+    for (size_t i = 0; i < good.size(); i++) {
+        REQUIRE(NoOperandInstr(good[i].first).encode(c) == good[i].second);
+    }
 }
