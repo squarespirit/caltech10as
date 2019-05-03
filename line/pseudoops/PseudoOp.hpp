@@ -14,7 +14,7 @@ public:
      * Convert an opcode and operands to a PseudoOp. Throw a ParseExn if 
      * the conversion fails.
      */
-    static Operation parseOperation(std::string opcode, std::vector<std::string> const &operands);
+    static Operation parseOp(std::string opcode, std::vector<std::string> const &operands);
 
     /**
      * Apply this PseudoOp to the provided context. 
