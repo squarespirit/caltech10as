@@ -11,8 +11,8 @@ TEST_CASE("Test ImmediateInstr encode") {
 
     std::vector<std::pair<ImmediateInstr, uint16_t>> good = {
         // Number
-        {{"ANDI", Symbol(std::nullopt, 0xBC)}, 0x47BC},
-        {{"LDI",  Symbol(std::nullopt, DATA_VALUE_SIZE - 1)}, 0x89FF},
+        {{"ANDI", Symbol(std::nullopt, Number(0xBC))}, 0x47BC},
+        {{"LDI",  Symbol(std::nullopt, Number(DATA_VALUE_SIZE - 1))}, 0x89FF},
         // Name
         {{"CMPI", Symbol(Name("const1"), std::nullopt)}, 0x33C1},
     };

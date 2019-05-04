@@ -12,7 +12,7 @@ public:
     /**
      * Construct a LabelDef from the name of the label.
      */
-    LabelDef(Name name);
+    explicit LabelDef(Name const &name);
     
     /**
      * Convert a string to a LabelDef. The string should be the label name

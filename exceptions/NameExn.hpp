@@ -8,5 +8,5 @@
  */
 class NameExn : public std::runtime_error {
 public:
-    NameExn(std::string msg);
+    explicit NameExn(std::string const &msg);
 };

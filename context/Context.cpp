@@ -3,14 +3,10 @@
 #include "exceptions/NameExn.hpp"
 #include "exceptions/RangeExn.hpp"
 
-Context::Context() {
-    labelMap = std::unordered_map<Name, Number>();
-    constantMap = std::unordered_map<Name, Number>();
-    curProgramAddress = 0;
-    curDataAddress = 0;
-}
+Context::Context() : labelMap(), constantMap(), curProgramAddress(0), 
+                     curDataAddress(0) {}
 
-Number Context::lookupLabel(Name name) const {
+Number const &Context::lookupLabel(Name const &name) const {
     try {
         return labelMap.at(name);
     } catch (std::out_of_range) {
@@ -18,7 +14,7 @@ Number Context::lookupLabel(Name name) const {
     }
 }
 
-Number Context::lookupConstant(Name name) const {
+Number const &Context::lookupConstant(Name const &name) const {
     try {
         return constantMap.at(name);
     } catch (std::out_of_range) {
@@ -34,13 +30,13 @@ number_t Context::getCurDataAddress() const {
     return curDataAddress;
 }
 
-void Context::addLabel(Name name, Number number) {
+void Context::addLabel(Name const &name, Number const &number) {
     if (!labelMap.insert({name, number}).second) {
         throw NameExn("Label " + name.getName() + " is already defined");
     }
 }
 
-void Context::addConstant(Name name, Number number) {
+void Context::addConstant(Name const &name, Number const &number) {
     if (!constantMap.insert({name, number}).second) {
         throw NameExn("Constant " + name.getName() + " is already defined");
     }

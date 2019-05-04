@@ -3,14 +3,14 @@
 #include <stdexcept>
 #include "exceptions/ParseExn.hpp"
 
-IncludeOp::IncludeOp(std::string f) : filename(f) {
-}
+IncludeOp::IncludeOp(std::string const &f) : filename(f) {}
 
 void IncludeOp::apply(Context &c) {
     throw std::logic_error(".include should not be applied to a context");
 }
 
-std::unique_ptr<IncludeOp> IncludeOp::parseOp(std::string opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<IncludeOp> IncludeOp::parseOp(
+        std::string const &opcode, std::vector<std::string> const &operands) {
     if (opcode != ".include") {
         throw ParseExn(".include opcode was " + opcode);
     }

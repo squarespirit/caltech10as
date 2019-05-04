@@ -10,8 +10,8 @@ TEST_CASE("Test DirectInstr encode") {
 
     std::vector<std::pair<DirectInstr, uint16_t>> good = {
         // Number
-        {{"LDD", Symbol(std::nullopt, 0xAD)}, 0x80AD},
-        {{"STD",  Symbol(std::nullopt, DATA_ADDRESS_SIZE - 1)}, 0xA0FF},
+        {{"LDD", Symbol(std::nullopt, Number(0xAD))}, 0x80AD},
+        {{"STD",  Symbol(std::nullopt, Number(DATA_ADDRESS_SIZE - 1))}, 0xA0FF},
         // Name
         {{"IN", Symbol(Name("const1"), std::nullopt)}, 0x90C1},
         {{"OUT", Symbol(Name("const2"), std::nullopt)}, 0xB0FF},

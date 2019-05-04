@@ -9,7 +9,7 @@
 TEST_CASE("Test parseSymbolInstr") {
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> directs = {
         {"LDD", {"$na_me"}, Symbol(Name("na_me"), std::nullopt)},
-        {"STD", {"EC"}, Symbol(std::nullopt, 0xEC)},
+        {"STD", {"EC"}, Symbol(std::nullopt, Number(0xEC))},
     };
     for (size_t i = 0; i < directs.size(); i++) {
         REQUIRE(
@@ -21,7 +21,7 @@ TEST_CASE("Test parseSymbolInstr") {
 
     std::vector<std::tuple<std::string, std::vector<std::string>, Symbol>> imms = {
         {"XORI", {"$TheName"}, Symbol(Name("TheName"), std::nullopt)},
-        {"LDI",  {"A1"}, Symbol(std::nullopt, 0xA1)},
+        {"LDI",  {"A1"}, Symbol(std::nullopt, Number(0xA1))},
     };
     for (size_t i = 0; i < imms.size(); i++) {
         REQUIRE(

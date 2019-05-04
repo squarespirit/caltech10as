@@ -1,4 +1,4 @@
 #include "RangeExn.hpp"
 
-RangeExn::RangeExn(std::string msg) : std::runtime_error(msg) {
+RangeExn::RangeExn(std::string const &msg) : std::runtime_error(msg) {
 }

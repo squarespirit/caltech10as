@@ -2,8 +2,7 @@
 #include "datatypes/NumberTypes.hpp"
 #include "exceptions/RangeExn.hpp"
 
-ByteOp::ByteOp(Symbol val) : dataValue(val) {
-}
+ByteOp::ByteOp(Symbol const &val) : dataValue(val) {}
 
 void ByteOp::apply(Context &c) {
     number_t n = dataValue.resolve(c);

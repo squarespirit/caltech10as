@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "exceptions/RangeExn.hpp"
 
-ImmediateInstr::ImmediateInstr(std::string opcode, Symbol s) : 
+ImmediateInstr::ImmediateInstr(std::string const &opcode, Symbol const &s) : 
         Mnemonic(opcode), dataValue(s) {}
 
 /**
@@ -26,7 +26,7 @@ const std::unordered_map<std::string, uint8_t> codeMap = {
 };
 
 
-bool ImmediateInstr::isValidOpcode(std::string opcode) {
+bool ImmediateInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 

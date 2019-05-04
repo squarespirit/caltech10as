@@ -3,7 +3,7 @@
 #include "exceptions/RangeExn.hpp"
 #include "exceptions/ParseExn.hpp"
 
-DataOp::DataOp(Symbol da) : dataAddress(da) {
+DataOp::DataOp(Symbol const &da) : dataAddress(da) {
 }
 
 void DataOp::apply(Context &c) {

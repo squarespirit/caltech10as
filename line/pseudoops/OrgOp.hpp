@@ -14,7 +14,7 @@ public:
      * Construct an OrgOp with a symbol representing the desired program
      * address.
      */
-    OrgOp(Symbol programAddress);
+    explicit OrgOp(Symbol const &programAddress);
 
     /**
      * Apply this OrgOp to the provided context, by updating its program

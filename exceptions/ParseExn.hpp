@@ -8,5 +8,5 @@
  */
 class ParseExn : public std::runtime_error {
 public:
-    ParseExn(std::string msg);
+    explicit ParseExn(std::string const &msg);
 };

@@ -11,8 +11,8 @@ TEST_CASE("Test ConstOp apply") {
 
     // Good name
     ConstOp(Name("const2"), Number(0x20)).apply(c);
-    REQUIRE(c.lookupConstant(Name("const1")) == 0x10);
-    REQUIRE(c.lookupConstant(Name("const2")) == 0x20);
+    REQUIRE(c.lookupConstant(Name("const1")) == Number(0x10));
+    REQUIRE(c.lookupConstant(Name("const2")) == Number(0x20));
 
     // Name already exists
     REQUIRE_THROWS_AS(

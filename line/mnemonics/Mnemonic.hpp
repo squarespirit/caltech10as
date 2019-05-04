@@ -15,13 +15,13 @@ public:
      * Construct a mnemonic with the given opcode. (Subclasses should have
      * more data members.)
      */
-    Mnemonic(std::string opcode);
+    explicit Mnemonic(std::string const &opcode);
     
     /**
      * Convert an opcode and operands to a Mnemonic. Throw a ParseExn if 
      * the conversion fails.
      */
-    static std::unique_ptr<Mnemonic> parseOp(std::string opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<Mnemonic> parseOp(std::string const &opcode, std::vector<std::string> const &operands);
 
     /**
      * Convert this mnemonic to machine code.

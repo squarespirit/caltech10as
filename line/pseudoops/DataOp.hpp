@@ -13,7 +13,7 @@ public:
     /**
      * Construct a DataOp with the desired data address.
      */
-    DataOp(Symbol da);
+    explicit DataOp(Symbol const &da);
 
     /**
      * Apply this DataOp to the provided context, by updating the data

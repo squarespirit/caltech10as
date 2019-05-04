@@ -10,13 +10,13 @@ public:
      * Convert a string to a number. Throw an exception if it cannot be
      * converted. All numbers are non-negative hexadecimal.
      */
-    Number(std::string number_s);
+    explicit Number(std::string number_s);
     /**
      * Construct a number directly.
      */
-    Number(number_t number);
+    explicit Number(number_t number);
 
-    number_t getNumber();
+    number_t getNumber() const;
 
     bool operator==(const Number&) const;
 

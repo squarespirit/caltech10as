@@ -1,14 +1,15 @@
 #include "ConstOp.hpp"
 #include "exceptions/ParseExn.hpp"
 
-ConstOp::ConstOp(Name name, Number number) : name(name), number(number) {
-}
+ConstOp::ConstOp(Name const &name, Number const &number)
+    : name(name), number(number) {}
 
 void ConstOp::apply(Context &c) {
     c.addConstant(name, number);
 }
 
-std::unique_ptr<ConstOp> ConstOp::parseOp(std::string opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<ConstOp> ConstOp::parseOp(
+        std::string const &opcode, std::vector<std::string> const &operands) {
     if (opcode != ".const") {
         throw ParseExn(".const opcode was " + opcode);
     }

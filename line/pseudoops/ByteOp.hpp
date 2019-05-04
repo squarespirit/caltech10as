@@ -11,7 +11,7 @@ public:
     /**
      * Construct a ByteOp with the value to write.
      */
-    ByteOp(Symbol val);
+    explicit ByteOp(Symbol const &val);
 
     /**
      * Apply this ByteOp to the provided context.
@@ -21,7 +21,7 @@ public:
      */
     void apply(Context &c);
 
-    bool operator==(const ByteOp&) const;
+    bool operator==(ByteOp const&) const;
 
 private:
     Symbol dataValue;

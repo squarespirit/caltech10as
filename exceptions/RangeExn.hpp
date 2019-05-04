@@ -8,5 +8,5 @@
  */
 class RangeExn : public std::runtime_error {
 public:
-    RangeExn(std::string msg);
+    explicit RangeExn(std::string const &msg);
 };

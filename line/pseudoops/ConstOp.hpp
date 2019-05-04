@@ -12,7 +12,7 @@ public:
     /**
      * Construct a ConstOp with the given name and value.
      */
-    ConstOp(Name name, Number number);
+    ConstOp(Name const &name, Number const &number);
 
     /**
      * Apply this ConstOp to the provided context.
@@ -26,7 +26,8 @@ public:
      * The format is .const <name> <number>.
      * Throw a ParseExn if the operation cannot be converted.
      */
-    static std::unique_ptr<ConstOp> parseOp(std::string opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<ConstOp> parseOp(
+        std::string const &opcode, std::vector<std::string> const &operands);
 
     bool operator==(const ConstOp&) const;
 

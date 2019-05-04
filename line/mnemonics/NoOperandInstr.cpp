@@ -47,14 +47,14 @@ const std::unordered_map<std::string, uint16_t> codeMap = {
     {"NOP", 0x1F80}
 };
 
-NoOperandInstr::NoOperandInstr(std::string opcode) : Mnemonic(opcode) {
-}
+NoOperandInstr::NoOperandInstr(std::string const &opcode) : Mnemonic(opcode) {}
 
-bool NoOperandInstr::isValidOpcode(std::string opcode) {
+bool NoOperandInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-std::unique_ptr<NoOperandInstr> NoOperandInstr::parseOp(std::string opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<NoOperandInstr> NoOperandInstr::parseOp(
+        std::string const &opcode, std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
         throw ParseExn("Unknown opcode " + opcode + " for no-operand instruction");
     }

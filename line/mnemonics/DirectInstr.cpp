@@ -1,7 +1,7 @@
 #include "DirectInstr.hpp"
 #include "exceptions/RangeExn.hpp"
 
-DirectInstr::DirectInstr(std::string opcode, Symbol dataAddress) :
+DirectInstr::DirectInstr(std::string const &opcode, Symbol const &dataAddress) :
     Mnemonic(opcode), dataAddress(dataAddress) {}
 
 /**
@@ -17,7 +17,7 @@ const std::unordered_map<std::string, uint8_t> codeMap = {
     {"OUT", 0xB0}
 };
 
-bool DirectInstr::isValidOpcode(std::string opcode) {
+bool DirectInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 

@@ -10,12 +10,12 @@ public:
      * Construct an ImmediateInstr with the given opcode and the given
      * symbol as the data value.
      */
-    ImmediateInstr(std::string, Symbol);
+    ImmediateInstr(std::string const &, Symbol const &);
 
     /**
      * Return whether the opcode is a valid opcode for an ImmediateInstr.
      */
-    static bool isValidOpcode(std::string opcode);
+    static bool isValidOpcode(std::string const &opcode);
 
     /**
      * Return the machine code of this ImmediateInstr.

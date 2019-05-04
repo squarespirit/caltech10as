@@ -41,7 +41,7 @@ Number::Number(number_t n) {
     number = n;
 }
 
-number_t Number::getNumber() {
+number_t Number::getNumber() const {
     return number;
 }
 

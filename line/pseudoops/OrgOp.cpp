@@ -3,8 +3,7 @@
 #include "exceptions/RangeExn.hpp"
 #include "exceptions/ParseExn.hpp"
 
-OrgOp::OrgOp(Symbol programAddress) : programAddress(programAddress) {
-}
+OrgOp::OrgOp(Symbol const &programAddress) : programAddress(programAddress) {}
 
 void OrgOp::apply(Context &c) {
     c.setCurProgramAddress(programAddress.resolve(c));

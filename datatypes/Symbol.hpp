@@ -14,7 +14,7 @@ public:
     /**
      * Create a symbol from a name and a number. Exactly one has to exist.
      */
-    Symbol(std::optional<Name> name, std::optional<Number> number);
+    Symbol(std::optional<Name> const &name, std::optional<Number> const &number);
 
     /**
      * Convert a string to a symbol. Throw a ParseExn if the string cannot
@@ -23,13 +23,13 @@ public:
      * constant. Otherwise, it is parsed as a number.
      * Leading or trailing whitespace is not tolerated.
      */
-    static Symbol parse(std::string);
+    static Symbol parse(std::string const &);
 
     /**
      * Resolve the symbol to a number. If it is a literal Number, return
      * its value. Otherwise, if it is a Name, look it up in the context.
      */
-    number_t resolve(const Context&);
+    number_t resolve(const Context&) const;
 
     bool operator==(const Symbol&) const;
 

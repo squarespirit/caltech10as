@@ -12,7 +12,7 @@ public:
     /**
      * Construct an IncludeOp with the given filename.
      */
-    IncludeOp(std::string f);
+    explicit IncludeOp(std::string const &f);
 
     /**
      * IncludeOp should not be applied to a context, so this throws an error.
@@ -24,7 +24,7 @@ public:
      * The only operand should be the filename.
      * Throw a ParseExn if the operation cannot be converted.
      */
-    static std::unique_ptr<IncludeOp> parseOp(std::string opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<IncludeOp> parseOp(std::string const &opcode, std::vector<std::string> const &operands);
 
     bool operator==(const IncludeOp&) const;
 

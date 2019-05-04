@@ -3,8 +3,9 @@
 #include "exceptions/ParseExn.hpp"
 #include "exceptions/RangeExn.hpp"
 
-ALUDataInstr::ALUDataInstr(std::string opcode, std::optional<Register> reg, Symbol da) : Mnemonic(opcode), reg(reg), dataAddress(da) {
-}
+ALUDataInstr::ALUDataInstr(
+    std::string const &opcode, std::optional<Register> const &reg,
+    Symbol const &da) : Mnemonic(opcode), reg(reg), dataAddress(da) {}
 
 /**
  * Map of opcode -> first 6 bits of ALU instruction.
@@ -21,12 +22,12 @@ const std::unordered_map<std::string, uint8_t> codeMap = {
     {"XOR", 0b001101}
 };
 
-bool ALUDataInstr::isValidOpcode(std::string opcode) {
+bool ALUDataInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
 std::unique_ptr<ALUDataInstr> ALUDataInstr::parseOp(
-        std::string opcode, std::vector<std::string> const &operands) {
+        std::string const &opcode, std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
         throw ParseExn("Unknown opcode " + opcode + " for ALU data instruction");
     }

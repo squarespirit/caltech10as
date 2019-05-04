@@ -9,7 +9,7 @@ public:
      * The first character must be alphabetic or underscore. Subsequent
      * characters must be alphanumeric or underscore.
      */
-    Name(std::string name);
+    explicit Name(std::string name);
 
     std::string getName() const;
 

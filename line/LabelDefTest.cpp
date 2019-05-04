@@ -11,7 +11,7 @@ TEST_CASE("Test LabelDef parsing") {
         {"lab123:",     "lab123"}
     };
     for (size_t i = 0; i < good.size(); i++) {
-        REQUIRE(LabelDef::parse(good[i].first) == LabelDef(good[i].second));
+        REQUIRE(LabelDef::parse(good[i].first) == LabelDef(Name(good[i].second)));
     }
 
     std::vector<std::string> bad = {

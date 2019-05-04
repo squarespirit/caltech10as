@@ -2,7 +2,8 @@
 #include <stdexcept>
 #include "exceptions/ParseExn.hpp"
 
-IncDecRegister::IncDecRegister(Register reg) : reg(reg), incDec(false) {}
+IncDecRegister::IncDecRegister(Register reg)
+    : reg(reg), incDec(false), isDec(false), isPost(false) {}
 
 IncDecRegister::IncDecRegister(Register reg, bool isDec, bool isPost) 
     : reg(reg), incDec(true), isDec(isDec), isPost(isPost) {}

@@ -10,12 +10,12 @@
 
 const std::unordered_set<std::string> symbolOpcodes = {".byte", ".data", ".org"};
 
-bool isValidSymbolOpcode(std::string opcode) {
+bool isValidSymbolOpcode(std::string const &opcode) {
     return symbolOpcodes.find(opcode) != symbolOpcodes.end();
 }
 
 
-std::unique_ptr<PseudoOp> parseSymbolOp(std::string opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<PseudoOp> parseSymbolOp(std::string const &opcode, std::vector<std::string> const &operands) {
     if (!isValidSymbolOpcode(opcode)) {
         throw ParseExn("Unknown pseudo-op with symbol operand " + opcode);
     }

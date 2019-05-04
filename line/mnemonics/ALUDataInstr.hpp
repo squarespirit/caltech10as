@@ -15,19 +15,20 @@ public:
      * addressing.
      * da is the direct address, or the offset for indexed addressing.
      */
-    ALUDataInstr(std::string opcode, std::optional<Register> reg, Symbol da);
+    ALUDataInstr(std::string const &opcode, std::optional<Register> const &reg,
+                 Symbol const &da);
 
     /**
      * Return whether the opcode is a valid opcode for an ALUDataInstr.
      */
-    static bool isValidOpcode(std::string opcode);
+    static bool isValidOpcode(std::string const &opcode);
 
     /**
      * Parse an ALUDataInstr. Throw a ParseExn if the opcode and operands
      * cannot be parsed.
      */
     static std::unique_ptr<ALUDataInstr> parseOp(
-        std::string opcode, std::vector<std::string> const &operands);
+        std::string const &opcode, std::vector<std::string> const &operands);
 
     /**
      * Return the machine code of this ALUDataInstr.

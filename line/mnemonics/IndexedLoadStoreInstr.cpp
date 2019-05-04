@@ -3,7 +3,8 @@
 #include "exceptions/RangeExn.hpp"
 
 IndexedLoadStoreInstr::IndexedLoadStoreInstr(
-        std::string opcode, IncDecRegister incDecReg, Symbol dataOffset)
+        std::string const &opcode, IncDecRegister const &incDecReg,
+        Symbol const &dataOffset)
         : Mnemonic(opcode), incDecReg(incDecReg), dataOffset(dataOffset) {}
 
 /**
@@ -15,13 +16,12 @@ const std::unordered_map<std::string, uint8_t> codeMap = {
 };
 
 
-bool IndexedLoadStoreInstr::isValidOpcode(std::string opcode) {
+bool IndexedLoadStoreInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
 std::unique_ptr<IndexedLoadStoreInstr> IndexedLoadStoreInstr::parseOp(
-    std::string opcode, std::vector<std::string> const &operands
-) {
+        std::string const &opcode, std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
         throw ParseExn("Invalid load/store opcode " + opcode);
     }

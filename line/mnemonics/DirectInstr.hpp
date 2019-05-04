@@ -10,12 +10,12 @@ public:
     /**
      * Construct a DirectInstr with the given opcode and address operand.
      */
-    DirectInstr(std::string opcode, Symbol dataAddress);
+    DirectInstr(std::string const &opcode, Symbol const &dataAddress);
 
     /**
      * Return whether the opcode is a valid opcode for a DirectInstr.
      */
-    static bool isValidOpcode(std::string opcode);
+    static bool isValidOpcode(std::string const &opcode);
 
     /**
      * Return the machine code of this DirectInstr.

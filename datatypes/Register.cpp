@@ -9,7 +9,7 @@ bool Register::getIsX() const {
     return isX;
 }
 
-Register Register::parse(std::string s) {
+Register Register::parse(std::string const &s) {
     if (s == "S") {
         return Register(false);
     } else if (s == "X") {

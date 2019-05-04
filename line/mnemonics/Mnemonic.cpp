@@ -1,6 +1,6 @@
 #include "Mnemonic.hpp"
 
-Mnemonic::Mnemonic(std::string opcode) : opcode(opcode) {
+Mnemonic::Mnemonic(std::string const &opcode) : opcode(opcode) {
 }
 
 bool Mnemonic::operator==(const Mnemonic &other) const {
