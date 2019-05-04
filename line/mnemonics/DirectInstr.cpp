@@ -28,3 +28,7 @@ uint16_t DirectInstr::encode(Context const &c) {
     }
     return (codeMap.at(getOpcode()) << 8) + address;
 }
+
+bool DirectInstr::operator==(DirectInstr const &other) const {
+    return Mnemonic::operator==(other) && dataAddress == other.dataAddress;
+}
