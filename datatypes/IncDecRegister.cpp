@@ -7,6 +7,10 @@ IncDecRegister::IncDecRegister(Register reg) : reg(reg), incDec(false) {}
 IncDecRegister::IncDecRegister(Register reg, bool isDec, bool isPost) 
     : reg(reg), incDec(true), isDec(isDec), isPost(isPost) {}
 
+Register const &IncDecRegister::getRegister() {
+    return reg;
+}
+
 bool IncDecRegister::hasIncDec() {
     return incDec;
 }

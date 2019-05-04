@@ -5,7 +5,7 @@
 class Register {
 public:
     Register(bool isX);
-    bool getIsX();
+    bool getIsX() const;
 
     /**
      * Parse a register.

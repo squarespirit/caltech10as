@@ -5,7 +5,7 @@ Register::Register(bool isX) {
     this->isX = isX;
 }
 
-bool Register::getIsX() {
+bool Register::getIsX() const {
     return isX;
 }
 

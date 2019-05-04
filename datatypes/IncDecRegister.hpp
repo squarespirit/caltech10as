@@ -15,6 +15,10 @@ public:
      */
     IncDecRegister(Register reg, bool isDec, bool isPost);
     /**
+     * Get register.
+     */
+    Register const &getRegister();
+    /**
      * Return whether this IncDecRegister has increment/decrement.
      */
     bool hasIncDec();
