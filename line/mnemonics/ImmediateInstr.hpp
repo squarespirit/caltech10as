@@ -18,8 +18,8 @@ public:
     static bool isValidOpcode(std::string opcode);
 
     /**
-     * Return the machine code of this ALUDataInstr.
-     * Throw a RangeExn if the data address/offset is out of range.
+     * Return the machine code of this ImmediateInstr.
+     * Throw a RangeExn if the data value is out of range.
      */
     uint16_t encode(Context const &c);
 
