@@ -20,7 +20,8 @@ LINE_MNEMONICS_OBJS = $(addprefix line/mnemonics/, \
 LINE_MNEMONICS_TEST_OBJS = $(addprefix line/mnemonics/, \
 	ALUDataInstrTest.o ConditionalJumpInstrTest.o DirectInstrTest.o \
 	ImmediateInstrTest.o IndexedLoadStoreInstrTest.o LabelInstrTest.o \
-	NoOperandInstrTest.o SymbolInstrTest.o UnconditionalJumpInstrTest.o)
+	MnemonicTest.o NoOperandInstrTest.o SymbolInstrTest.o \
+	UnconditionalJumpInstrTest.o)
 LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, \
 	ByteOp.o ConstOp.o DataOp.o OrgOp.o IncludeOp.o PseudoOp.o SymbolOp.o)
 LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, \
