@@ -37,7 +37,7 @@ public:
 
     /**
      * Convert a string to an IncDecRegister.
-     * For a register without increment or decrement, the string should be 
+     * For a register without increment or decrement, the string should be
      * "<reg>".
      * For a register with increment or decrement, the string should be
      * "<+/-><reg>" or "<reg><+/->".
@@ -45,7 +45,8 @@ public:
      */
     static IncDecRegister parse(std::string s);
 
-    bool operator==(const IncDecRegister&) const;
+    bool operator==(const IncDecRegister &) const;
+
 private:
     Register reg;
     bool incDec;

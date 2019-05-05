@@ -1,18 +1,17 @@
 #include "test/catch.hpp"
 
 #include "OrgOp.hpp"
-#include <tuple>
+#include "context/Context.hpp"
 #include "exceptions/NameExn.hpp"
 #include "exceptions/ParseExn.hpp"
 #include "exceptions/RangeExn.hpp"
-#include "context/Context.hpp"
-
+#include <tuple>
 
 TEST_CASE("Test OrgOp apply") {
     Context c;
     c.setCurProgramAddress(0x5);
     c.addConstant(Name("const1"), Number(0x10));
-    
+
     // Good symbol
     // Good number
     OrgOp(Symbol(Number(0x15))).apply(c);

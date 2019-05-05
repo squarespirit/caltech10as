@@ -21,7 +21,7 @@ public:
      */
     void apply(Context &c);
 
-    bool operator==(ByteOp const&) const;
+    bool operator==(ByteOp const &) const;
 
 private:
     Symbol dataValue;

@@ -1,8 +1,8 @@
 #pragma once
 #include "PseudoOp.hpp"
 #include "datatypes/Symbol.hpp"
-#include <vector>
 #include <memory>
+#include <vector>
 
 /**
  * ConstOp defines a constant with a given value.
@@ -26,10 +26,11 @@ public:
      * The format is .const <name> <number>.
      * Throw a ParseExn if the operation cannot be converted.
      */
-    static std::unique_ptr<ConstOp> parseOp(
-        std::string const &opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<ConstOp>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
-    bool operator==(const ConstOp&) const;
+    bool operator==(const ConstOp &) const;
 
 private:
     Name name;

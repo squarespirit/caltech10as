@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "NumberTypes.hpp"
+#include <string>
 
 #define NUMBER_MAX_DIGITS (sizeof(number_t) * 2)
 
@@ -18,7 +18,7 @@ public:
 
     number_t getNumber() const;
 
-    bool operator==(const Number&) const;
+    bool operator==(const Number &) const;
 
 private:
     number_t number;

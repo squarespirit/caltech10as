@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
-#include <vector>
 #include "PseudoOp.hpp"
 #include "datatypes/Symbol.hpp"
+#include <string>
+#include <vector>
 
 /**
  * DataOp is a pseudo-op that updates the current data address.
@@ -22,7 +22,7 @@ public:
      */
     void apply(Context &c);
 
-    bool operator==(const DataOp&) const;
+    bool operator==(const DataOp &) const;
 
 private:
     Symbol dataAddress;

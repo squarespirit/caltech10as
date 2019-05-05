@@ -1,9 +1,9 @@
 #include "ImmediateInstr.hpp"
-#include <unordered_map>
 #include "exceptions/RangeExn.hpp"
+#include <unordered_map>
 
-ImmediateInstr::ImmediateInstr(std::string const &opcode, Symbol const &s) : 
-        Mnemonic(opcode), dataValue(s) {}
+ImmediateInstr::ImmediateInstr(std::string const &opcode, Symbol const &s)
+    : Mnemonic(opcode), dataValue(s) {}
 
 /**
  * Map of opcode -> high 8 bits of instruction. (The immediate value is encoded
@@ -15,16 +15,14 @@ const std::unordered_map<std::string, uint8_t> codeMap = {
     {"ADDI", 0x6B},
     {"ANDI", 0x47},
     {"CMPI", 0x33},
-    {"ORI",  0x77},
+    {"ORI", 0x77},
     {"SBBI", 0x1B},
     {"SUBI", 0x13},
     {"TSTI", 0x4F},
     {"XORI", 0x37},
 
     // LDI
-    {"LDI",  0x89}
-};
-
+    {"LDI", 0x89}};
 
 bool ImmediateInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();

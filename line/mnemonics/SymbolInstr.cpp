@@ -1,18 +1,18 @@
 #include "SymbolInstr.hpp"
-#include "exceptions/ParseExn.hpp"
 #include "DirectInstr.hpp"
 #include "ImmediateInstr.hpp"
+#include "exceptions/ParseExn.hpp"
 
 bool isValidSymbolInstrOpcode(std::string opcode) {
-    return DirectInstr::isValidOpcode(opcode)
-           || ImmediateInstr::isValidOpcode(opcode);
+    return DirectInstr::isValidOpcode(opcode) ||
+           ImmediateInstr::isValidOpcode(opcode);
 }
 
-std::unique_ptr<Mnemonic> parseSymbolInstr(
-        std::string opcode, std::vector<std::string> operands) {
+std::unique_ptr<Mnemonic> parseSymbolInstr(std::string opcode,
+                                           std::vector<std::string> operands) {
     if (operands.size() != 1) {
-        throw ParseExn("Symbol instruction must take 1 operand, got " 
-            + std::to_string(operands.size()));
+        throw ParseExn("Symbol instruction must take 1 operand, got " +
+                       std::to_string(operands.size()));
     }
 
     Symbol s = Symbol::parse(operands[0]);

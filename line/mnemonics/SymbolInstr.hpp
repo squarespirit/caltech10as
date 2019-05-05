@@ -6,8 +6,8 @@
  * This parses both DirectInstrs and ImmediateInstrs.
  * Throw a ParseExn if the opcode or operands are invalid.
  */
-std::unique_ptr<Mnemonic> parseSymbolInstr(
-        std::string opcode, std::vector<std::string> operands);
+std::unique_ptr<Mnemonic> parseSymbolInstr(std::string opcode,
+                                           std::vector<std::string> operands);
 
 /**
  * Return whether the given opcode is one that can be parsed by

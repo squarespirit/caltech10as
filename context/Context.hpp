@@ -20,12 +20,12 @@ public:
     /**
      * Get the number of a label. Throw a NameExn if the label is not defined.
      */
-    Number const &lookupLabel(Name const&) const;
+    Number const &lookupLabel(Name const &) const;
     /**
      * Get the number of a constant. Throw a NameExn if the constant is not
      * defined.
      */
-    Number const &lookupConstant(Name const&) const;
+    Number const &lookupConstant(Name const &) const;
     /** Get current program address. */
     number_t getCurProgramAddress() const;
     /** Get current data address. */
@@ -34,11 +34,11 @@ public:
     /**
      * Add label. Throw a NameExn if the label is already defined.
      */
-    void addLabel(Name const&, Number const&);
+    void addLabel(Name const &, Number const &);
     /**
      * Add constant. Throw a NameExn if the constant is already defined.
      */
-    void addConstant(Name const&, Number const&);
+    void addConstant(Name const &, Number const &);
     /**
      * Set current program address. Throw RangeExn if the new address is out
      * of range.

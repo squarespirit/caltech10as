@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
-#include <vector>
 #include "PseudoOp.hpp"
 #include "datatypes/Symbol.hpp"
+#include <string>
+#include <vector>
 
 /**
  * OrgOp is a pseudo-op that updates the current program address.
@@ -23,7 +23,7 @@ public:
      */
     void apply(Context &c);
 
-    bool operator==(const OrgOp&) const;
+    bool operator==(const OrgOp &) const;
 
 private:
     Symbol programAddress;

@@ -1,8 +1,7 @@
 #include "LabelDef.hpp"
 #include "exceptions/ParseExn.hpp"
 
-LabelDef::LabelDef(Name const &name) : name(name) {
-}
+LabelDef::LabelDef(Name const &name) : name(name) {}
 
 LabelDef LabelDef::parse(std::string s) {
     if (s.length() == 0) {

@@ -20,7 +20,7 @@ public:
      * da is the data offset.
      */
     ALUDataInstr(std::string const &opcode, Register const &reg,
-            Symbol const &da);
+                 Symbol const &da);
 
     /**
      * Return whether the opcode is a valid opcode for an ALUDataInstr.
@@ -31,8 +31,9 @@ public:
      * Parse an ALUDataInstr. Throw a ParseExn if the opcode and operands
      * cannot be parsed.
      */
-    static std::unique_ptr<ALUDataInstr> parseOp(
-        std::string const &opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<ALUDataInstr>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
     /**
      * Return the machine code of this ALUDataInstr.

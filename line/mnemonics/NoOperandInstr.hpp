@@ -16,11 +16,12 @@ public:
     static bool isValidOpcode(std::string const &opcode);
 
     /**
-     * Convert an opcode and operands to a NoOperandInstr. Throw a ParseExn if 
+     * Convert an opcode and operands to a NoOperandInstr. Throw a ParseExn if
      * the conversion fails.
      */
-    static std::unique_ptr<NoOperandInstr> parseOp(std::string const &opcode,
-        std::vector<std::string> const &operands);
+    static std::unique_ptr<NoOperandInstr>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
     /**
      * Return the machine code of this NoOperandInstr.

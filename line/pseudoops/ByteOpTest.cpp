@@ -1,11 +1,11 @@
-#include "test/catch.hpp"
 #include "ByteOp.hpp"
 #include "datatypes/NumberTypes.hpp"
 #include "exceptions/RangeExn.hpp"
+#include "test/catch.hpp"
 
 TEST_CASE("Test ByteOp apply") {
     Context c;
-    c.setCurDataAddress((number_t) 0x5);
+    c.setCurDataAddress((number_t)0x5);
     c.addConstant(Name("const1"), Number(0x10));
     c.addConstant(Name("big"), Number(0xFFFF));
 
@@ -19,13 +19,8 @@ TEST_CASE("Test ByteOp apply") {
 
     // Data value too large
     // Large number
-    REQUIRE_THROWS_AS(
-        ByteOp(Symbol(Number(DATA_VALUE_SIZE))).apply(c),
-        RangeExn
-    );
+    REQUIRE_THROWS_AS(ByteOp(Symbol(Number(DATA_VALUE_SIZE))).apply(c),
+                      RangeExn);
     // Large name
-    REQUIRE_THROWS_AS(
-        ByteOp(Symbol(Name("big"))).apply(c),
-        RangeExn
-    );
+    REQUIRE_THROWS_AS(ByteOp(Symbol(Name("big"))).apply(c), RangeExn);
 }

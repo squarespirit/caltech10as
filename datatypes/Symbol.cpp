@@ -6,8 +6,8 @@
 
 Symbol::Symbol(Name const &name) : isName(true), name(name), number(0) {}
 
-Symbol::Symbol(Number const &number) : isName(false), name("_"), 
-                                       number(number) {}
+Symbol::Symbol(Number const &number)
+    : isName(false), name("_"), number(number) {}
 
 Symbol Symbol::parse(std::string const &s) {
     if (s.length() == 0) {

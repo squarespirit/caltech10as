@@ -1,7 +1,7 @@
 #include "../Operation.hpp"
-#include <vector>
-#include <memory>
 #include "PseudoOp.hpp"
+#include <memory>
+#include <vector>
 
 /**
  * Return if the given opcode is of an operation that can be parsed by
@@ -15,4 +15,6 @@ bool isValidSymbolOpcode(std::string const &opcode);
  * It returns a newly-allocated PseudoOp.
  * Throw ParseExn if the operation cannot be parsed.
  */
-std::unique_ptr<PseudoOp> parseSymbolOp(std::string const &opcode, std::vector<std::string> const &operands);
+std::unique_ptr<PseudoOp>
+parseSymbolOp(std::string const &opcode,
+              std::vector<std::string> const &operands);

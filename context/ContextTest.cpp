@@ -5,7 +5,6 @@
 #include "exceptions/NameExn.hpp"
 #include "exceptions/RangeExn.hpp"
 
-
 TEST_CASE("Test that Context persists labels") {
     Context c;
     c.addLabel(Name("lab1"), Number(1234));

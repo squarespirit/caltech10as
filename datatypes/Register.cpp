@@ -1,13 +1,9 @@
 #include "Register.hpp"
 #include "exceptions/ParseExn.hpp"
 
-Register::Register(bool isX) {
-    this->isX = isX;
-}
+Register::Register(bool isX) { this->isX = isX; }
 
-bool Register::getIsX() const {
-    return isX;
-}
+bool Register::getIsX() const { return isX; }
 
 Register Register::parse(std::string const &s) {
     if (s == "S") {

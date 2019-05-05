@@ -1,27 +1,30 @@
 #include "SymbolOp.hpp"
 
-#include <stdexcept>
-#include <unordered_set>
-#include "datatypes/Symbol.hpp"
-#include "exceptions/ParseExn.hpp"
+#include "ByteOp.hpp"
 #include "DataOp.hpp"
 #include "OrgOp.hpp"
-#include "ByteOp.hpp"
+#include "datatypes/Symbol.hpp"
+#include "exceptions/ParseExn.hpp"
+#include <stdexcept>
+#include <unordered_set>
 
-const std::unordered_set<std::string> symbolOpcodes = {".byte", ".data", ".org"};
+const std::unordered_set<std::string> symbolOpcodes = {".byte", ".data",
+                                                       ".org"};
 
 bool isValidSymbolOpcode(std::string const &opcode) {
     return symbolOpcodes.find(opcode) != symbolOpcodes.end();
 }
 
-
-std::unique_ptr<PseudoOp> parseSymbolOp(std::string const &opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<PseudoOp>
+parseSymbolOp(std::string const &opcode,
+              std::vector<std::string> const &operands) {
     if (!isValidSymbolOpcode(opcode)) {
         throw ParseExn("Unknown pseudo-op with symbol operand " + opcode);
     }
 
     if (operands.size() != 1) {
-        throw ParseExn(opcode + " must have one operand (got " + std::to_string(operands.size()) + ")");
+        throw ParseExn(opcode + " must have one operand (got " +
+                       std::to_string(operands.size()) + ")");
     }
 
     Symbol s = Symbol::parse(operands[0]);

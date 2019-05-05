@@ -1,6 +1,6 @@
-#include "test/catch.hpp"
 #include "NoOperandInstr.hpp"
 #include "exceptions/ParseExn.hpp"
+#include "test/catch.hpp"
 
 TEST_CASE("Test NoOperandInstr parseOp") {
     // Good
@@ -27,8 +27,7 @@ TEST_CASE("Test NoOperandInstr encode") {
         {"STI", 0x7F81},
         {"TSA", 0x6700},
         {"POPF", 0x0200},
-        {"NOP", 0x1F80}
-    };
+        {"NOP", 0x1F80}};
 
     for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(NoOperandInstr(good[i].first).encode(c) == good[i].second);

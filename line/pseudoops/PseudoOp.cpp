@@ -1,11 +1,12 @@
 #include "PseudoOp.hpp"
-#include "SymbolOp.hpp"
-#include "IncludeOp.hpp"
 #include "ConstOp.hpp"
+#include "IncludeOp.hpp"
+#include "SymbolOp.hpp"
 #include "exceptions/ParseExn.hpp"
 
-
-std::unique_ptr<PseudoOp> PseudoOp::parseOp(std::string opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<PseudoOp>
+PseudoOp::parseOp(std::string opcode,
+                  std::vector<std::string> const &operands) {
     if (isValidSymbolOpcode(opcode)) {
         return parseSymbolOp(opcode, operands);
     } else if (opcode == ".const") {

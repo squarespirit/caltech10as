@@ -1,20 +1,16 @@
 #include "IncDecRegister.hpp"
-#include <stdexcept>
 #include "exceptions/ParseExn.hpp"
+#include <stdexcept>
 
 IncDecRegister::IncDecRegister(Register reg)
     : reg(reg), incDec(false), isDec(false), isPost(false) {}
 
-IncDecRegister::IncDecRegister(Register reg, bool isDec, bool isPost) 
+IncDecRegister::IncDecRegister(Register reg, bool isDec, bool isPost)
     : reg(reg), incDec(true), isDec(isDec), isPost(isPost) {}
 
-Register const &IncDecRegister::getRegister() {
-    return reg;
-}
+Register const &IncDecRegister::getRegister() { return reg; }
 
-bool IncDecRegister::hasIncDec() {
-    return incDec;
-}
+bool IncDecRegister::hasIncDec() { return incDec; }
 
 bool IncDecRegister::getIsDec() {
     if (!incDec) {
@@ -42,18 +38,12 @@ IncDecRegister IncDecRegister::parse(std::string s) {
         // Register with increment/decrement
         if (s[0] == '+' || s[0] == '-') {
             // Pre
-            return IncDecRegister(
-                Register::parse(s.substr(1, 1)),
-                s[0] == '-',
-                false
-            );
+            return IncDecRegister(Register::parse(s.substr(1, 1)), s[0] == '-',
+                                  false);
         } else if (s[1] == '+' || s[1] == '-') {
             // Post
-            return IncDecRegister(
-                Register::parse(s.substr(0, 1)),
-                s[1] == '-',
-                true
-            );
+            return IncDecRegister(Register::parse(s.substr(0, 1)), s[1] == '-',
+                                  true);
         } else {
             throw ParseExn("Expected +/- in register spec " + s);
         }
@@ -61,7 +51,7 @@ IncDecRegister IncDecRegister::parse(std::string s) {
     throw ParseExn("Too many characters in register spec " + s);
 }
 
-bool IncDecRegister::operator==(const IncDecRegister& other) const {
+bool IncDecRegister::operator==(const IncDecRegister &other) const {
     bool res = reg == other.reg && incDec == other.incDec;
     if (incDec) {
         res &= isDec == other.isDec && isPost == other.isPost;

@@ -1,14 +1,14 @@
 #include <string>
 #include <vector>
 
+#include "Name.hpp"
 #include "exceptions/ParseExn.hpp"
 #include "test/catch.hpp"
-#include "Name.hpp"
 
 TEST_CASE("Test Name construction") {
     std::vector<std::string> good = {
         // One character
-        "_", 
+        "_",
         "a",
         "B"
         // Multi-character
@@ -28,17 +28,13 @@ TEST_CASE("Test Name construction") {
         // Empty
         "",
         // One character
-        "!",
-        " ",
-        "\0",
+        "!", " ", "\0",
         "1", // A number
         // Multi-character
-        "a!",
-        "badVari@ble",
+        "a!", "badVari@ble",
         "1a", // Starts with number
         // Leading or trailing space
-        "   abc",
-        "var \t",
+        "   abc", "var \t",
     };
 
     for (size_t i = 0; i < bad.size(); i++) {

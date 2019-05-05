@@ -1,10 +1,10 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <memory>
 #include "../Operation.hpp"
 #include "context/Context.hpp"
+#include <memory>
+#include <string>
+#include <vector>
 
 /**
  * Mnemonic is an instruction that can be translated to machine code.
@@ -16,12 +16,14 @@ public:
      * more data members.)
      */
     explicit Mnemonic(std::string const &opcode);
-    
+
     /**
-     * Convert an opcode and operands to a Mnemonic. Throw a ParseExn if 
+     * Convert an opcode and operands to a Mnemonic. Throw a ParseExn if
      * the conversion fails.
      */
-    static std::unique_ptr<Mnemonic> parseOp(std::string const &opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<Mnemonic>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
     /**
      * Convert this mnemonic to machine code.
@@ -31,7 +33,7 @@ public:
     /**
      * Return true if their opcodes are equal.
      */
-    bool operator==(const Mnemonic&) const;
+    bool operator==(const Mnemonic &) const;
 
     /**
      * Get the mnemonic's opcode.

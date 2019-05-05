@@ -16,14 +16,16 @@ public:
      * dataOffset is the offset.
      */
     IndexedLoadStoreInstr(std::string const &opcode,
-        IncDecRegister const &incDecReg, Symbol const &dataOffset);
-    
+                          IncDecRegister const &incDecReg,
+                          Symbol const &dataOffset);
+
     /**
      * Parse an IndexedLoadStoreInstr.
      * Throw ParseExn if the instruction cannot be parsed.
      */
-    static std::unique_ptr<IndexedLoadStoreInstr> parseOp(
-        std::string const &opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<IndexedLoadStoreInstr>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
     /**
      * Return whether the opcode is a valid opcode for an IndexedLoadStoreInstr.
@@ -36,7 +38,7 @@ public:
      */
     uint16_t encode(Context const &c) override;
 
-    bool operator==(const IndexedLoadStoreInstr&) const;
+    bool operator==(const IndexedLoadStoreInstr &) const;
 
 private:
     IncDecRegister incDecReg;

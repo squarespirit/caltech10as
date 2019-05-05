@@ -1,10 +1,10 @@
 #include "Context.hpp"
-#include <stdexcept>
 #include "exceptions/NameExn.hpp"
 #include "exceptions/RangeExn.hpp"
+#include <stdexcept>
 
-Context::Context() : labelMap(), constantMap(), curProgramAddress(0), 
-                     curDataAddress(0) {}
+Context::Context()
+    : labelMap(), constantMap(), curProgramAddress(0), curDataAddress(0) {}
 
 Number const &Context::lookupLabel(Name const &name) const {
     try {
@@ -22,13 +22,9 @@ Number const &Context::lookupConstant(Name const &name) const {
     }
 }
 
-number_t Context::getCurProgramAddress() const {
-    return curProgramAddress;
-}
+number_t Context::getCurProgramAddress() const { return curProgramAddress; }
 
-number_t Context::getCurDataAddress() const {
-    return curDataAddress;
-}
+number_t Context::getCurDataAddress() const { return curDataAddress; }
 
 void Context::addLabel(Name const &name, Number const &number) {
     if (!labelMap.insert({name, number}).second) {
@@ -55,4 +51,3 @@ void Context::setCurDataAddress(number_t d) {
     }
     curDataAddress = d;
 }
-

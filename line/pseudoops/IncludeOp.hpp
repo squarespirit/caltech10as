@@ -1,8 +1,7 @@
 #pragma once
 #include "PseudoOp.hpp"
-#include <vector>
 #include <memory>
-
+#include <vector>
 
 /**
  * IncludeOp is a directive to read instructions from another assembly file.
@@ -24,9 +23,11 @@ public:
      * The only operand should be the filename.
      * Throw a ParseExn if the operation cannot be converted.
      */
-    static std::unique_ptr<IncludeOp> parseOp(std::string const &opcode, std::vector<std::string> const &operands);
+    static std::unique_ptr<IncludeOp>
+    parseOp(std::string const &opcode,
+            std::vector<std::string> const &operands);
 
-    bool operator==(const IncludeOp&) const;
+    bool operator==(const IncludeOp &) const;
 
 private:
     std::string filename;

@@ -1,17 +1,17 @@
 #include "test/catch.hpp"
 
 #include "DataOp.hpp"
-#include "exceptions/RangeExn.hpp"
+#include "context/Context.hpp"
 #include "exceptions/NameExn.hpp"
 #include "exceptions/ParseExn.hpp"
-#include "context/Context.hpp"
+#include "exceptions/RangeExn.hpp"
 
 TEST_CASE("Test DataOp apply") {
     Context c;
-    c.setCurDataAddress((number_t) 0x5);
+    c.setCurDataAddress((number_t)0x5);
     c.addConstant(Name("const1"), Number(0x10));
     c.addConstant(Name("big"), Number(0xFFFF));
-    
+
     // Good symbol
     // Good number
     DataOp(Symbol(Number(0x15))).apply(c);

@@ -1,7 +1,7 @@
 #include "NoOperandInstr.hpp"
 
-#include <unordered_map>
 #include "exceptions/ParseExn.hpp"
+#include <unordered_map>
 
 /**
  * Map of opcode -> machine code of whole instruction.
@@ -39,13 +39,12 @@ const std::unordered_map<std::string, uint16_t> codeMap = {
     {"DES", 0x0E40},
 
     // Control flow instructions
-    {"RTS",   0x1F00},
-    {"POPF",  0x0200},
+    {"RTS", 0x1F00},
+    {"POPF", 0x0200},
     {"PUSHF", 0x0E00},
 
     // Misc instructions
-    {"NOP", 0x1F80}
-};
+    {"NOP", 0x1F80}};
 
 NoOperandInstr::NoOperandInstr(std::string const &opcode) : Mnemonic(opcode) {}
 
@@ -53,13 +52,16 @@ bool NoOperandInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-std::unique_ptr<NoOperandInstr> NoOperandInstr::parseOp(
-        std::string const &opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<NoOperandInstr>
+NoOperandInstr::parseOp(std::string const &opcode,
+                        std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
-        throw ParseExn("Unknown opcode " + opcode + " for no-operand instruction");
+        throw ParseExn("Unknown opcode " + opcode +
+                       " for no-operand instruction");
     }
     if (operands.size() != 0) {
-        throw ParseExn(opcode + " must take 0 operands (got " + std::to_string(operands.size()) + ")");
+        throw ParseExn(opcode + " must take 0 operands (got " +
+                       std::to_string(operands.size()) + ")");
     }
     return std::make_unique<NoOperandInstr>(opcode);
 }

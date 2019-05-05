@@ -13,20 +13,19 @@ public:
 
     std::string getName() const;
 
-    bool operator==(const Name&) const;
+    bool operator==(const Name &) const;
 
 private:
     std::string name;
 };
 
-
 namespace std {
-    /**
-     * Name will be the key of a hash-map, so it needs to be hashable.
-     */
-    template <> struct hash<Name> {
-        std::size_t operator()(const Name& n) const {
-            return std::hash<string>()(n.getName());
-        }
-    };
+/**
+ * Name will be the key of a hash-map, so it needs to be hashable.
+ */
+template <> struct hash<Name> {
+    std::size_t operator()(const Name &n) const {
+        return std::hash<string>()(n.getName());
+    }
+};
 }

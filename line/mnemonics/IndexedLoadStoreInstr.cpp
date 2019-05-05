@@ -2,45 +2,42 @@
 #include "exceptions/ParseExn.hpp"
 #include "exceptions/RangeExn.hpp"
 
-IndexedLoadStoreInstr::IndexedLoadStoreInstr(
-        std::string const &opcode, IncDecRegister const &incDecReg,
-        Symbol const &dataOffset)
-        : Mnemonic(opcode), incDecReg(incDecReg), dataOffset(dataOffset) {}
+IndexedLoadStoreInstr::IndexedLoadStoreInstr(std::string const &opcode,
+                                             IncDecRegister const &incDecReg,
+                                             Symbol const &dataOffset)
+    : Mnemonic(opcode), incDecReg(incDecReg), dataOffset(dataOffset) {}
 
 /**
  * Map of opcode -> high 3 bits of instruction.
  */
 const std::unordered_map<std::string, uint8_t> codeMap = {
-    {"LD", 0b100},
-    {"ST", 0b101},
+    {"LD", 0b100}, {"ST", 0b101},
 };
-
 
 bool IndexedLoadStoreInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-std::unique_ptr<IndexedLoadStoreInstr> IndexedLoadStoreInstr::parseOp(
-        std::string const &opcode, std::vector<std::string> const &operands) {
+std::unique_ptr<IndexedLoadStoreInstr>
+IndexedLoadStoreInstr::parseOp(std::string const &opcode,
+                               std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
         throw ParseExn("Invalid load/store opcode " + opcode);
     }
     if (operands.size() != 1) {
-        throw ParseExn(opcode + " requires 1 operand (got " 
-                       + std::to_string(operands.size()) + ")");
+        throw ParseExn(opcode + " requires 1 operand (got " +
+                       std::to_string(operands.size()) + ")");
     }
     std::string operand = operands[0];
     size_t commaIndex = operand.find(',');
     if (commaIndex == std::string::npos) {
-        throw ParseExn(opcode + " operand " + operand 
-                       + " must be indexed (contain a ',')");
+        throw ParseExn(opcode + " operand " + operand +
+                       " must be indexed (contain a ',')");
     }
 
     return std::make_unique<IndexedLoadStoreInstr>(
-        opcode,
-        IncDecRegister::parse(operand.substr(0, commaIndex)),
-        Symbol::parse(operand.substr(commaIndex + 1))
-    );
+        opcode, IncDecRegister::parse(operand.substr(0, commaIndex)),
+        Symbol::parse(operand.substr(commaIndex + 1)));
 }
 
 uint16_t IndexedLoadStoreInstr::encode(Context const &c) {
@@ -63,14 +60,12 @@ uint16_t IndexedLoadStoreInstr::encode(Context const &c) {
         throw RangeExn("Offset " + toHexString(offset) + " is too large");
     }
 
-    return (codeMap.at(getOpcode()) << 13) 
-           + (incDecBits << 11)
-           + (incDecReg.getRegister().getIsX() << 10)
-           + (addrMode << 8)
-           + offset;
+    return (codeMap.at(getOpcode()) << 13) + (incDecBits << 11) +
+           (incDecReg.getRegister().getIsX() << 10) + (addrMode << 8) + offset;
 }
 
-bool IndexedLoadStoreInstr::operator==(const IndexedLoadStoreInstr &other) const {
-    return Mnemonic::operator==(other) && incDecReg == other.incDecReg
-           && dataOffset == other.dataOffset;
+bool IndexedLoadStoreInstr::
+operator==(const IndexedLoadStoreInstr &other) const {
+    return Mnemonic::operator==(other) && incDecReg == other.incDecReg &&
+           dataOffset == other.dataOffset;
 }

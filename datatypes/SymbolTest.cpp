@@ -3,41 +3,27 @@
 #include "Number.hpp"
 #include "Symbol.hpp"
 #include "context/Context.hpp"
-#include "exceptions/ParseExn.hpp"
 #include "exceptions/NameExn.hpp"
+#include "exceptions/ParseExn.hpp"
 
 TEST_CASE("Test Symbol parsing") {
     std::vector<std::pair<std::string, number_t>> numbers = {
-        {"0",       0},
-        {"a12",     0xa12},
-        {"FFFF",    0xFFFF}
-    };
+        {"0", 0}, {"a12", 0xa12}, {"FFFF", 0xFFFF}};
     for (size_t i = 0; i < numbers.size(); i++) {
-        REQUIRE(
-            Symbol::parse(numbers[i].first)
-            == Symbol(Number(numbers[i].second))
-        );
+        REQUIRE(Symbol::parse(numbers[i].first) ==
+                Symbol(Number(numbers[i].second)));
     }
 
     std::vector<std::pair<std::string, std::string>> names = {
-        {"$a",       "a"},
-        {"$FFFF",    "FFFF"},
-        {"$_myName", "_myName"}
-    };
+        {"$a", "a"}, {"$FFFF", "FFFF"}, {"$_myName", "_myName"}};
     for (size_t i = 0; i < numbers.size(); i++) {
-        REQUIRE(
-            Symbol::parse(names[i].first)
-            == Symbol(Name(names[i].second))
-        );
+        REQUIRE(Symbol::parse(names[i].first) == Symbol(Name(names[i].second)));
     }
 
-    std::vector<std::string> bad = {
-        "", // Empty symbol
-        "FFFFG", // Invalid number
-        "$", // Invalid name
-        "$n@me",
-        "$hello "
-    };
+    std::vector<std::string> bad = {"",      // Empty symbol
+                                    "FFFFG", // Invalid number
+                                    "$",     // Invalid name
+                                    "$n@me", "$hello "};
     for (size_t i = 0; i < bad.size(); i++) {
         REQUIRE_THROWS_AS(Symbol::parse(bad[i]), ParseExn);
     }
@@ -57,4 +43,3 @@ TEST_CASE("Test Symbol resolve") {
     // Constant does not exist
     REQUIRE_THROWS_AS(Symbol(Name("hello")).resolve(c), NameExn);
 }
-
