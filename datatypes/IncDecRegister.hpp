@@ -9,7 +9,7 @@ public:
     /**
      * Construct an IncDecRegister without increment/decrement.
      */
-    IncDecRegister(Register reg);
+    explicit IncDecRegister(Register reg);
     /**
      * Construct an IncDecRegister with increment/decrement.
      */

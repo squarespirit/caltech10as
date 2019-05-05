@@ -4,15 +4,10 @@
 
 #include "exceptions/ParseExn.hpp"
 
-Symbol::Symbol(std::optional<Name> const &name, std::optional<Number> const &number) {
-    if (bool(name) == bool(number)) {
-        // That is, both are undefined or both are defined
-        throw std::invalid_argument("Exactly one of name and number must be defined");
-    }
+Symbol::Symbol(Name const &name) : isName(true), name(name), number(0) {}
 
-    this->name = name;
-    this->number = number;
-}
+Symbol::Symbol(Number const &number) : isName(false), name("_"), 
+                                       number(number) {}
 
 Symbol Symbol::parse(std::string const &s) {
     if (s.length() == 0) {
@@ -20,19 +15,25 @@ Symbol Symbol::parse(std::string const &s) {
     }
 
     if (s[0] == '$') {
-        return Symbol(Name(s.substr(1)), std::nullopt);
+        return Symbol(Name(s.substr(1)));
     }
 
-    return Symbol(std::nullopt, Number(s));
+    return Symbol(Number(s));
 }
 
 number_t Symbol::resolve(Context const &c) const {
-    if (bool(name)) {
-        return c.lookupConstant(*name).getNumber();
+    if (isName) {
+        return c.lookupConstant(name).getNumber();
     }
-    return number->getNumber();
+    return number.getNumber();
 }
 
 bool Symbol::operator==(const Symbol &other) const {
-    return this->name == other.name && this->number == other.number;
+    if (isName != other.isName) {
+        return false;
+    }
+    if (isName) {
+        return name == other.name;
+    }
+    return number == other.number;
 }

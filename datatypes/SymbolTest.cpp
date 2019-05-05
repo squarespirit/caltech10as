@@ -15,7 +15,7 @@ TEST_CASE("Test Symbol parsing") {
     for (size_t i = 0; i < numbers.size(); i++) {
         REQUIRE(
             Symbol::parse(numbers[i].first)
-            == Symbol(std::nullopt, Number(numbers[i].second))
+            == Symbol(Number(numbers[i].second))
         );
     }
 
@@ -27,7 +27,7 @@ TEST_CASE("Test Symbol parsing") {
     for (size_t i = 0; i < numbers.size(); i++) {
         REQUIRE(
             Symbol::parse(names[i].first)
-            == Symbol(Name(names[i].second), std::nullopt)
+            == Symbol(Name(names[i].second))
         );
     }
 
@@ -49,12 +49,12 @@ TEST_CASE("Test Symbol resolve") {
     c.addConstant(Name("const1"), Number(2));
 
     // Literal number
-    REQUIRE(Symbol(std::nullopt, Number(123)).resolve(c) == 123);
+    REQUIRE(Symbol(Number(123)).resolve(c) == 123);
 
     // Constant exists
-    REQUIRE(Symbol(Name("const1"), std::nullopt).resolve(c) == 2);
+    REQUIRE(Symbol(Name("const1")).resolve(c) == 2);
 
     // Constant does not exist
-    REQUIRE_THROWS_AS(Symbol(Name("hello"), std::nullopt).resolve(c), NameExn);
+    REQUIRE_THROWS_AS(Symbol(Name("hello")).resolve(c), NameExn);
 }
 

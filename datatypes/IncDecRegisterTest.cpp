@@ -4,8 +4,8 @@
 
 TEST_CASE("Test IncDecRegister parse") {
     std::vector<std::pair<std::string, IncDecRegister>> good = {
-        {"X",   {Register(true)}},
-        {"S",   {Register(false)}},
+        {"X",   IncDecRegister(Register(true))},
+        {"S",   IncDecRegister(Register(false))},
         //                        isDec  isPost
         {"+X",  {Register(true),  false, false}},
         {"-X",  {Register(true),  true,  false}},

@@ -8,13 +8,20 @@
 /**
  * A symbol is either a number or the name of a constant (that stores a
  * number).
+ * Given a context, which contains a mapping of constant names, a Symbol can
+ * be definitively resolved to a number.
  */
 class Symbol {
 public:
     /**
-     * Create a symbol from a name and a number. Exactly one has to exist.
+     * Create a symbol that represents a name.
      */
-    Symbol(std::optional<Name> const &name, std::optional<Number> const &number);
+    explicit Symbol(Name const &name);
+
+    /**
+     * Create a symbol that represents a number.
+     */
+    explicit Symbol(Number const &number);
 
     /**
      * Convert a string to a symbol. Throw a ParseExn if the string cannot
@@ -34,6 +41,12 @@ public:
     bool operator==(const Symbol&) const;
 
 private:
-    std::optional<Name> name;
-    std::optional<Number> number;
+    bool isName;
+    /*
+     * Using a union is a headache because Name is not a "trivial" datatype.
+     * It contains a string, which manages an array of chars...
+     * Instead, set the unused type to a dummy value.
+     */
+    Name name;
+    Number number;
 };

@@ -10,11 +10,11 @@ TEST_CASE("Test DirectInstr encode") {
 
     std::vector<std::pair<DirectInstr, uint16_t>> good = {
         // Number
-        {{"LDD", Symbol(std::nullopt, Number(0xAD))}, 0x80AD},
-        {{"STD",  Symbol(std::nullopt, Number(DATA_ADDRESS_SIZE - 1))}, 0xA0FF},
+        {{"LDD", Symbol(Number(0xAD))}, 0x80AD},
+        {{"STD",  Symbol(Number(DATA_ADDRESS_SIZE - 1))}, 0xA0FF},
         // Name
-        {{"IN", Symbol(Name("const1"), std::nullopt)}, 0x90C1},
-        {{"OUT", Symbol(Name("const2"), std::nullopt)}, 0xB0FF},
+        {{"IN", Symbol(Name("const1"))}, 0x90C1},
+        {{"OUT", Symbol(Name("const2"))}, 0xB0FF},
     };
     for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(std::get<0>(good[i]).encode(c) == std::get<1>(good[i]));
@@ -22,9 +22,9 @@ TEST_CASE("Test DirectInstr encode") {
 
     std::vector<DirectInstr> badRange = {
         // Name too large
-        {"LDD", Symbol(Name("biG"), std::nullopt)},
+        {"LDD", Symbol(Name("biG"))},
         // Number too large
-        {"IN",  Symbol(std::nullopt, Number(0xFFF))},
+        {"IN",  Symbol(Number(0xFFF))},
     };
     for (size_t i = 0; i < badRange.size(); i++) {
         REQUIRE_THROWS_AS(badRange[i].encode(c), RangeExn);

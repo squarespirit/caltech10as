@@ -15,20 +15,14 @@ TEST_CASE("Test OrgOp apply") {
     
     // Good symbol
     // Good number
-    OrgOp(Symbol(std::nullopt, Number(0x15))).apply(c);
+    OrgOp(Symbol(Number(0x15))).apply(c);
     REQUIRE(c.getCurProgramAddress() == 0x15);
     // Good name
-    OrgOp(Symbol(Name("const1"), std::nullopt)).apply(c);
+    OrgOp(Symbol(Name("const1"))).apply(c);
     REQUIRE(c.getCurProgramAddress() == 0x10);
 
     // Bad name
-    REQUIRE_THROWS_AS(
-        OrgOp(Symbol(Name("const2"), std::nullopt)).apply(c),
-        NameExn
-    );
+    REQUIRE_THROWS_AS(OrgOp(Symbol(Name("const2"))).apply(c), NameExn);
     // Number too large
-    REQUIRE_THROWS_AS(
-        OrgOp(Symbol(std::nullopt, Number(0x2FFF))).apply(c),
-        RangeExn
-    );
+    REQUIRE_THROWS_AS(OrgOp(Symbol(Number(0x2FFF))).apply(c), RangeExn);
 }

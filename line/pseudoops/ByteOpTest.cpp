@@ -11,21 +11,21 @@ TEST_CASE("Test ByteOp apply") {
 
     // Good data value
     // Good number
-    ByteOp(Symbol(std::nullopt, Number(0x15))).apply(c);
+    ByteOp(Symbol(Number(0x15))).apply(c);
     REQUIRE(c.getCurDataAddress() == 0x6);
     // Good name
-    ByteOp(Symbol(Name("const1"), std::nullopt)).apply(c);
+    ByteOp(Symbol(Name("const1"))).apply(c);
     REQUIRE(c.getCurDataAddress() == 0x7);
 
     // Data value too large
     // Large number
     REQUIRE_THROWS_AS(
-        ByteOp(Symbol(std::nullopt, Number(DATA_VALUE_SIZE))).apply(c),
+        ByteOp(Symbol(Number(DATA_VALUE_SIZE))).apply(c),
         RangeExn
     );
     // Large name
     REQUIRE_THROWS_AS(
-        ByteOp(Symbol(Name("big"), std::nullopt)).apply(c),
+        ByteOp(Symbol(Name("big"))).apply(c),
         RangeExn
     );
 }
