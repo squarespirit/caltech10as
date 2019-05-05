@@ -31,14 +31,9 @@ ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) \
 ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) \
 	$(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) $(TEST_MAIN_OBJS)
 
-.PHONY: all clean cloc lint test
+.PHONY: all clean cloc fmt lint test
 
 all: $(EXECS)
-
-lint:
-	# Do not check test files
-	cppcheck --enable=all -q -I. --error-exitcode=1 --suppress="*:test/*" \
-		--suppress="*:*Test.cpp" .
 
 # Use implicit .cpp -> .o rule to compile all .o files
 
@@ -55,3 +50,13 @@ clean:
 	# Delete object files
 	find . -name "*.o" -type f -delete
 	rm -f $(EXECS)
+
+fmt:
+	# Do not format catch.hpp
+	clang-format -i \
+		`find . -name "*.cpp" -o  -name "*.hpp" ! -path "*test/catch.hpp"`
+
+lint:
+	# Do not check test files
+	cppcheck --enable=all -q -I. --error-exitcode=1 --suppress="*:test/*" \
+		--suppress="*:*Test.cpp" .
