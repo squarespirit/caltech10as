@@ -25,6 +25,8 @@ public:
      */
     uint16_t encode(Context const &c);
 
+    bool operator==(const UnconditionalJumpInstr &other) const;
+
 private:
-    Name name;
+    Name label;
 };
