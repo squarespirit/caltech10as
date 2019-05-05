@@ -6,7 +6,7 @@ TEST_CASE("Test IncDecRegister parse") {
     std::vector<std::pair<std::string, IncDecRegister>> good = {
         {"X", IncDecRegister(Register::X)},
         {"S", IncDecRegister(Register::S)},
-        //                    isDec  isPost
+        //                   isDec  isPost
         {"+X", {Register::X, false, false}},
         {"-X", {Register::X, true, false}},
         {"+S", {Register::S, false, false}},
@@ -28,12 +28,7 @@ TEST_CASE("Test IncDecRegister parse") {
                                     // No register
                                     "++", "--",
                                     // Bad register
-                                    "XX"
-                                    "SS",
-                                    "XS", "SX+"
-                                          "+R",
-                                    "-T"
-                                    "u+"};
+                                    "XX", "SS", "XS", "SX+", "+R", "-T", "u+"};
     for (size_t i = 0; i < bad.size(); i++) {
         REQUIRE_THROWS_AS(IncDecRegister::parse(bad[i]), ParseExn);
     }
