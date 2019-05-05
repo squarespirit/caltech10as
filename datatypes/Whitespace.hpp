@@ -1,0 +1,21 @@
+#pragma once
+#include <string>
+#include <vector>
+
+/**
+ * Return whether the character is whitespace (space or tab).
+ * Only inline whitespace is considered. (\n is *not* considered whitespace.)
+ */
+bool isWhitespace(char c);
+
+/**
+ * Split a string around whitespace.
+ * Return a vector of tokens. These are the text between the whitespace,
+ * in the order they appear in the original string.
+ *
+ * Consecutive runs of whitespace are considered to be a single delimiter
+ * between tokens.
+ * If the string begins with whitespace, the first element will be "".
+ * Likewise, if the string ends with whitespace, the last element will be "".
+ */
+std::vector<std::string> splitWhitespace(std::string const &s);

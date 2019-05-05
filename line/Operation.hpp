@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 /**
@@ -12,5 +13,11 @@ public:
      * Convert a string to an Operation. Throw a ParseExn if the string
      * cannot be converted.
      */
-    static Operation parse(std::string);
+    static std::unique_ptr<Operation> parse(std::string const &);
+
+    /**
+     * Make Operation dynamically castable, by adding a vtable.
+     * The easiest way to do this is to mark the destructor as virtual.
+     */
+    virtual ~Operation() = 0;
 };

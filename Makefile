@@ -6,13 +6,14 @@ EXECS=TestMain
 CONTEXT_OBJS = context/Context.o
 CONTEXT_TEST_OBJS = context/ContextTest.o
 DATATYPES_OBJS = $(addprefix datatypes/, \
-	IncDecRegister.o Name.o Number.o NumberTypes.o Symbol.o Register.o)
+	IncDecRegister.o Name.o Number.o NumberTypes.o Symbol.o Register.o \
+	Whitespace.o)
 DATATYPES_TEST_OBJS = $(addprefix datatypes/, \
-	IncDecRegisterTest.o NameTest.o NumberTest.o SymbolTest.o)
+	IncDecRegisterTest.o NameTest.o NumberTest.o SymbolTest.o WhitespaceTest.o)
 EXCEPTION_OBJS = $(addprefix exceptions/, \
 	NameExn.o ParseExn.o RangeExn.o)
-LINE_OBJS = $(addprefix line/, LabelDef.o)
-LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
+LINE_OBJS = $(addprefix line/, LabelDef.o Operation.o)
+LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o OperationTest.o)
 LINE_MNEMONICS_OBJS = $(addprefix line/mnemonics/, \
 	ALUDataInstr.o ConditionalJumpInstr.o DirectInstr.o Mnemonic.o \
 	ImmediateInstr.o IndexedLoadStoreInstr.o LabelInstr.o NoOperandInstr.o \
@@ -34,7 +35,7 @@ ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) \
 ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) \
 	$(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) $(TEST_MAIN_OBJS)
 
-.PHONY: all clean cloc fmt lint test
+.PHONY: all clean clean-libs cloc fmt lint test
 
 all: $(EXECS)
 
