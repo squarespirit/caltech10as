@@ -14,13 +14,13 @@ TEST_CASE("Test ALUDataInstr parse") {
         // Direct, name
         {"ADD", {"$var"},   {"ADD", Symbol(Name("var"))}},
         // X-indexed, number
-        {"AND", {"X,1b"},   {"AND", Register(true), Symbol(Number(0x1B))}},
+        {"AND", {"X,1b"},   {"AND", Register::X, Symbol(Number(0x1B))}},
         // X-indexed, name
-        {"AND", {"X,$xoff"}, {"AND", Register(true), Symbol(Name("xoff"))}},
+        {"AND", {"X,$xoff"}, {"AND", Register::X, Symbol(Name("xoff"))}},
         // S-indexed, number
-        {"SBB", {"S,0"},    {"SBB", Register(false), Symbol(Number(0))}},
+        {"SBB", {"S,0"},    {"SBB", Register::S, Symbol(Number(0))}},
         // S-indexed, name
-        {"TST", {"S,$_S_"}, {"TST", Register(false), Symbol(Name("_S_"))}},
+        {"TST", {"S,$_S_"}, {"TST", Register::S, Symbol(Name("_S_"))}},
     };
     for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(
@@ -65,9 +65,9 @@ TEST_CASE("Test ALUDataInstr encode") {
         {{"CMP", Symbol(Name("const1"))}, 0x30C1},
 
         // X-indexed
-        {{"OR",  Register(true), Symbol(Name("const2"))}, 0x7522},
+        {{"OR",  Register::X, Symbol(Name("const2"))}, 0x7522},
         // S-indexed
-        {{"XOR", Register(false), Symbol(Number(1))}, 0x3601},
+        {{"XOR", Register::S, Symbol(Number(1))}, 0x3601},
     };
     for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(std::get<0>(good[i]).encode(c) == std::get<1>(good[i]));
@@ -75,9 +75,9 @@ TEST_CASE("Test ALUDataInstr encode") {
 
     std::vector<ALUDataInstr> badRange = {
         // Name too large
-        {"SUB", Register(false), Symbol(Name("biG"))},
+        {"SUB", Register::S, Symbol(Name("biG"))},
         // Number too large
-        {"XOR", Register(false), Symbol(Number(0xFFF))},
+        {"XOR", Register::S, Symbol(Number(0xFFF))},
     };
     for (size_t i = 0; i < badRange.size(); i++) {
         REQUIRE_THROWS_AS(badRange[i].encode(c), RangeExn);
@@ -85,7 +85,7 @@ TEST_CASE("Test ALUDataInstr encode") {
 
     std::vector<ALUDataInstr> badName = {
         {"TST", Symbol(Name("myName"))},
-        {"ADD", Register(true), Symbol(Name("___"))},
+        {"ADD", Register::X, Symbol(Name("___"))},
     };
     for (size_t i = 0; i < badName.size(); i++) {
         REQUIRE_THROWS_AS(badName[i].encode(c), NameExn);

@@ -14,6 +14,16 @@ public:
      */
     static Register parse(std::string const&);
 
+    /**
+     * Constant for the S register.
+     */
+    static const Register S;
+
+    /**
+     * Constant for the X register.
+     */
+    static const Register X;
+
     bool operator==(Register const &) const;
 
 private:

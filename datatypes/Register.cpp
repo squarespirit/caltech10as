@@ -18,6 +18,10 @@ Register Register::parse(std::string const &s) {
     throw ParseExn("Invalid register " + s);
 }
 
+const Register Register::S = Register(false);
+
+const Register Register::X = Register(true);
+
 bool Register::operator==(Register const &other) const {
     return isX == other.isX;
 }

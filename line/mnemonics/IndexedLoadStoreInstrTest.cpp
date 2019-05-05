@@ -9,16 +9,16 @@ TEST_CASE("Test IndexedLoadStoreInstr parse") {
         // No inc/dec
         // Name
         {"LD", {"X,$name"},
-         {"LD", IncDecRegister(Register(true)), Symbol(Name("name"))}},
+         {"LD", IncDecRegister(Register::X), Symbol(Name("name"))}},
         // Number
         {"LD", {"S,12"}, 
-         {"LD", IncDecRegister(Register(false)), Symbol(Number(0x12))}},
+         {"LD", IncDecRegister(Register::S), Symbol(Number(0x12))}},
         
         // With inc/dec
         {"ST", {"+S,$off"},
-         {"ST", IncDecRegister(Register(false), false, false), Symbol(Name("off"))}},
+         {"ST", IncDecRegister(Register::S, false, false), Symbol(Name("off"))}},
         {"ST", {"X-,34"},
-         {"ST", IncDecRegister(Register(true), true, true), Symbol(Number(0x34))}},
+         {"ST", IncDecRegister(Register::X, true, true), Symbol(Number(0x34))}},
     };
 
     for (size_t i = 0; i < good.size(); i++) {
@@ -61,27 +61,27 @@ TEST_CASE("Test IndexedLoadStoreInstr encode") {
     std::vector<std::pair<IndexedLoadStoreInstr, uint16_t>> good = {
         // Loads
         // X
-        {{"LD", IncDecRegister(Register(true)), Symbol(Name("const1"))},
+        {{"LD", IncDecRegister(Register::X), Symbol(Name("const1"))},
          0x97C1},
         // Pre-increment X
-        {{"LD", IncDecRegister(Register(true), false, false), Symbol(Number(0x20))},
+        {{"LD", IncDecRegister(Register::X, false, false), Symbol(Number(0x20))},
          0x8620},
         // S
-        {{"LD", IncDecRegister(Register(false)), Symbol(Name("const2"))},
+        {{"LD", IncDecRegister(Register::S), Symbol(Name("const2"))},
          0x9322},
         // Pre-decrement S
-        {{"LD", IncDecRegister(Register(false), true, false), Symbol(Number(0x01))},
+        {{"LD", IncDecRegister(Register::S, true, false), Symbol(Number(0x01))},
          0x8A01},
         
         // Stores
         // X
-        {{"ST", IncDecRegister(Register(true)), Symbol(Number(0x90))},
+        {{"ST", IncDecRegister(Register::X), Symbol(Number(0x90))},
          0xB790},
         // Post-decrement X
-        {{"ST", IncDecRegister(Register(true), true, true), Symbol(Number(0xAA))},
+        {{"ST", IncDecRegister(Register::X, true, true), Symbol(Number(0xAA))},
          0xBEAA},
         // Post-increment S
-        {{"ST", IncDecRegister(Register(false), false, true), Symbol(Number(0x00))},
+        {{"ST", IncDecRegister(Register::S, false, true), Symbol(Number(0x00))},
          0xB200}
     };
 
@@ -91,9 +91,9 @@ TEST_CASE("Test IndexedLoadStoreInstr encode") {
 
     std::vector<IndexedLoadStoreInstr> badrange = {
         // Name too big
-        {"LD", IncDecRegister(Register(true)), Symbol(Name("biG"))},
+        {"LD", IncDecRegister(Register::X), Symbol(Name("biG"))},
         // Number too big
-        {"ST", IncDecRegister(Register(false), false, true), Symbol(Number(0xFFF))},
+        {"ST", IncDecRegister(Register::S, false, true), Symbol(Number(0xFFF))},
     };
     for (size_t i = 0; i < badrange.size(); i++) {
         REQUIRE_THROWS_AS(badrange[i].encode(c), RangeExn);
