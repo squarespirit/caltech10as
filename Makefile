@@ -15,10 +15,12 @@ LINE_OBJS = $(addprefix line/, LabelDef.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o)
 LINE_MNEMONICS_OBJS = $(addprefix line/mnemonics/, \
 	ALUDataInstr.o DirectInstr.o Mnemonic.o ImmediateInstr.o \
-	IndexedLoadStoreInstr.o NoOperandInstr.o SymbolInstr.o)
+	IndexedLoadStoreInstr.o NoOperandInstr.o SymbolInstr.o \
+	UnconditionalJumpInstr.o)
 LINE_MNEMONICS_TEST_OBJS = $(addprefix line/mnemonics/, \
 	ALUDataInstrTest.o DirectInstrTest.o ImmediateInstrTest.o \
-	IndexedLoadStoreInstrTest.o NoOperandInstrTest.o SymbolInstrTest.o)
+	IndexedLoadStoreInstrTest.o NoOperandInstrTest.o SymbolInstrTest.o \
+	UnconditionalJumpInstrTest.o)
 LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, \
 	ByteOp.o ConstOp.o DataOp.o OrgOp.o IncludeOp.o PseudoOp.o SymbolOp.o)
 LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, \
