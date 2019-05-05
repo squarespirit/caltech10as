@@ -7,24 +7,25 @@
 #include <iostream>
 
 TEST_CASE("Test ALUDataInstr parse") {
-    std::vector<std::tuple<std::string, std::vector<std::string>, std::optional<Register>, Symbol>> good = {
+    std::vector<std::tuple<std::string, std::vector<std::string>, ALUDataInstr>>
+    good = {
         // Direct, number
-        {"ADC", {"2A"}, std::nullopt, Symbol(Number("2A"))},
+        {"ADC", {"2A"},     {"ADC", Symbol(Number(0x2A))}},
         // Direct, name
-        {"ADD", {"$var"}, std::nullopt, Symbol(Name("var"))},
+        {"ADD", {"$var"},   {"ADD", Symbol(Name("var"))}},
         // X-indexed, number
-        {"AND", {"X,1b"}, Register(true), Symbol(Number("1B"))},
+        {"AND", {"X,1b"},   {"AND", Register(true), Symbol(Number(0x1B))}},
         // X-indexed, name
-        {"AND", {"X,$xoff"}, Register(true), Symbol(Name("xoff"))},
+        {"AND", {"X,$xoff"}, {"AND", Register(true), Symbol(Name("xoff"))}},
         // S-indexed, number
-        {"SBB", {"S,0"}, Register(false), Symbol(Number("0"))},
+        {"SBB", {"S,0"},    {"SBB", Register(false), Symbol(Number(0))}},
         // S-indexed, name
-        {"TST", {"S,$_S_"}, Register(false), Symbol(Name("_S_"))},
+        {"TST", {"S,$_S_"}, {"TST", Register(false), Symbol(Name("_S_"))}},
     };
     for (size_t i = 0; i < good.size(); i++) {
         REQUIRE(
             *ALUDataInstr::parseOp(std::get<0>(good[i]), std::get<1>(good[i]))
-            == ALUDataInstr(std::get<0>(good[i]), std::get<2>(good[i]), std::get<3>(good[i]))
+            == std::get<2>(good[i])
         );
     }
 
@@ -59,9 +60,9 @@ TEST_CASE("Test ALUDataInstr encode") {
 
     std::vector<std::pair<ALUDataInstr, uint16_t>> good = {
         // Direct, number
-        {{"AND", std::nullopt, Symbol(Number(0xBC))}, 0x44BC},
+        {{"AND", Symbol(Number(0xBC))}, 0x44BC},
         // Direct, name
-        {{"CMP", std::nullopt, Symbol(Name("const1"))}, 0x30C1},
+        {{"CMP", Symbol(Name("const1"))}, 0x30C1},
 
         // X-indexed
         {{"OR",  Register(true), Symbol(Name("const2"))}, 0x7522},
@@ -83,7 +84,7 @@ TEST_CASE("Test ALUDataInstr encode") {
     }
 
     std::vector<ALUDataInstr> badName = {
-        {"TST", std::nullopt, Symbol(Name("myName"))},
+        {"TST", Symbol(Name("myName"))},
         {"ADD", Register(true), Symbol(Name("___"))},
     };
     for (size_t i = 0; i < badName.size(); i++) {

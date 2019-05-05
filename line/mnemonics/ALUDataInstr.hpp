@@ -1,5 +1,4 @@
 #include "Mnemonic.hpp"
-#include <optional>
 #include "datatypes/Register.hpp"
 #include "datatypes/Symbol.hpp"
 
@@ -10,13 +9,18 @@
 class ALUDataInstr : public Mnemonic {
 public:
     /**
-     * Construct an ALUDataInstr.
-     * reg is the register to index from, if the instruction uses indexed
-     * addressing.
-     * da is the direct address, or the offset for indexed addressing.
+     * Construct an ALU instruction with direct addressing.
+     * da is the address.
      */
-    ALUDataInstr(std::string const &opcode, std::optional<Register> const &reg,
-                 Symbol const &da);
+    ALUDataInstr(std::string const &opcode, Symbol const &da);
+
+    /**
+     * Construct an ALU instruction with indexed addressing.
+     * reg is the register to index from.
+     * da is the data offset.
+     */
+    ALUDataInstr(std::string const &opcode, Register const &reg,
+            Symbol const &da);
 
     /**
      * Return whether the opcode is a valid opcode for an ALUDataInstr.

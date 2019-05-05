@@ -3,9 +3,12 @@
 #include "exceptions/ParseExn.hpp"
 #include "exceptions/RangeExn.hpp"
 
-ALUDataInstr::ALUDataInstr(
-    std::string const &opcode, std::optional<Register> const &reg,
+ALUDataInstr::ALUDataInstr(std::string const &opcode, Symbol const &da)
+    : Mnemonic(opcode), reg(std::nullopt), dataAddress(da) {}
+
+ALUDataInstr::ALUDataInstr(std::string const &opcode, Register const &reg,
     Symbol const &da) : Mnemonic(opcode), reg(reg), dataAddress(da) {}
+
 
 /**
  * Map of opcode -> first 6 bits of ALU instruction.
@@ -29,17 +32,19 @@ bool ALUDataInstr::isValidOpcode(std::string const &opcode) {
 std::unique_ptr<ALUDataInstr> ALUDataInstr::parseOp(
         std::string const &opcode, std::vector<std::string> const &operands) {
     if (!isValidOpcode(opcode)) {
-        throw ParseExn("Unknown opcode " + opcode + " for ALU data instruction");
+        throw ParseExn("Unknown opcode " + opcode 
+                       + " for ALU data instruction");
     }
     if (operands.size() != 1) {
-        throw ParseExn(opcode + " requires 1 operand (got " + std::to_string(operands.size()) + ")");
+        throw ParseExn(opcode + " requires 1 operand (got " 
+                       + std::to_string(operands.size()) + ")");
     }
     std::string const &operand = operands[0];
     
     size_t commaIndex = operand.find(',');
     if (commaIndex == std::string::npos) {
         // No register, direct addressing
-        return std::make_unique<ALUDataInstr>(opcode, std::nullopt, Symbol::parse(operand));
+        return std::make_unique<ALUDataInstr>(opcode, Symbol::parse(operand));
     }
     // Indexed addressing
     return std::make_unique<ALUDataInstr>(
