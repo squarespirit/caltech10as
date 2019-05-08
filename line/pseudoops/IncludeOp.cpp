@@ -5,9 +5,9 @@
 
 IncludeOp::IncludeOp(std::string const &f) : filename(f) {}
 
-void IncludeOp::apply(Context &c) {
-    throw std::logic_error(".include should not be applied to a context");
-}
+void IncludeOp::apply(Context &c) const {}
+
+std::string const &IncludeOp::getFilename() { return filename; }
 
 std::unique_ptr<IncludeOp>
 IncludeOp::parseOp(std::string const &opcode,

@@ -20,7 +20,7 @@ public:
      * address.
      * Throw an RangeExn if the new address is out of range.
      */
-    void apply(Context &c);
+    void apply(Context &c) const override;
 
     bool operator==(const DataOp &) const;
 

@@ -19,7 +19,7 @@ public:
      * So, just advance the data address.
      * Throw a RangeExn if the value to write is out of range.
      */
-    void apply(Context &c);
+    void apply(Context &c) const override;
 
     bool operator==(ByteOp const &) const;
 

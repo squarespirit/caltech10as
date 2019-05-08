@@ -21,5 +21,5 @@ public:
     /**
      * Apply this PseudoOp to the provided context.
      */
-    virtual void apply(Context &c) = 0;
+    virtual void apply(Context &c) const = 0;
 };

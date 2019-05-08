@@ -4,7 +4,7 @@
 
 ByteOp::ByteOp(Symbol const &val) : dataValue(val) {}
 
-void ByteOp::apply(Context &c) {
+void ByteOp::apply(Context &c) const {
     number_t n = dataValue.resolve(c);
     if (n >= DATA_VALUE_SIZE) {
         throw RangeExn("Data value " + toHexString(n) + " is out of range");

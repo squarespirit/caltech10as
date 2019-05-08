@@ -5,7 +5,9 @@
 
 DataOp::DataOp(Symbol const &da) : dataAddress(da) {}
 
-void DataOp::apply(Context &c) { c.setCurDataAddress(dataAddress.resolve(c)); }
+void DataOp::apply(Context &c) const {
+    c.setCurDataAddress(dataAddress.resolve(c));
+}
 
 bool DataOp::operator==(const DataOp &other) const {
     return dataAddress == other.dataAddress;

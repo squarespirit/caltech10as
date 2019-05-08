@@ -5,7 +5,7 @@
 
 OrgOp::OrgOp(Symbol const &programAddress) : programAddress(programAddress) {}
 
-void OrgOp::apply(Context &c) {
+void OrgOp::apply(Context &c) const {
     c.setCurProgramAddress(programAddress.resolve(c));
 }
 

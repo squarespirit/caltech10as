@@ -14,9 +14,14 @@ public:
     explicit IncludeOp(std::string const &f);
 
     /**
-     * IncludeOp should not be applied to a context, so this throws an error.
+     * IncludeOp is not meant to be applied to a context, so this method
+     * does nothing.
+     * Instead, the purpose of an IncludeOp is to store the filename of the
+     * file to be included, so the user should call getFilename() instead.
      */
-    void apply(Context &c);
+    void apply(Context &c) const override;
+
+    std::string const &getFilename();
 
     /**
      * Convert the given opcode and operands to a IncludeOp.

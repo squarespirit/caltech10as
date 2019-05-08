@@ -21,7 +21,7 @@ public:
      * address.
      * Throw a RangeExn if the new address is out of range.
      */
-    void apply(Context &c);
+    void apply(Context &c) const;
 
     bool operator==(const OrgOp &) const;
 

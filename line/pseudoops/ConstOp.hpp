@@ -19,7 +19,7 @@ public:
      * Add a constant of the given name to the context.
      * Throw a NameExn if the name already exists.
      */
-    void apply(Context &c);
+    void apply(Context &c) const override;
 
     /**
      * Convert the given opcode and operands to a ConstOp.
