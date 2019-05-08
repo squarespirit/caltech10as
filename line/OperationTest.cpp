@@ -30,7 +30,12 @@ TEST_CASE("Test Operation parse") {
             DirectInstr("IN", Symbol(Name("A"))));
 
     // Bad opcode
-    REQUIRE_THROWS_AS(Operation::parse(""), ParseExn);
-    REQUIRE_THROWS_AS(Operation::parse(".none a"), ParseExn);
-    REQUIRE_THROWS_AS(Operation::parse("INZ"), ParseExn);
+    std::vector<std::string> bad = {
+        "", ".none a", "INZ",
+        " ADD 3",  // Leading space
+        ".org AA " // Trailing space
+    };
+    for (std::string const &s : bad) {
+        REQUIRE_THROWS_AS(Operation::parse(s), ParseExn);
+    }
 }

@@ -1,6 +1,27 @@
 #include "Whitespace.hpp"
 #include "test/catch.hpp"
 
+TEST_CASE("Test trimWhitespace") {
+    std::vector<std::pair<std::string, std::string>> cases = {
+        {"", ""},
+        {"a", "a"},
+        // Leading
+        {" a", "a"},
+        {"\t\tbbb", "bbb"},
+        // Trailing
+        {"a ", "a"},
+        {"!!!@ A B\tc\t  ", "!!!@ A B\tc"},
+        // Leading and trailing
+        {" a ", "a"},
+        {" a b c  \t\t", "a b c"},
+    };
+    for (auto const &c : cases) {
+        std::string s = c.first;
+        trimWhitespace(s);
+        REQUIRE(s == c.second);
+    }
+}
+
 TEST_CASE("Test splitWhitespace") {
     std::vector<std::pair<std::string, std::vector<std::string>>> cases = {
         {"", {""}},

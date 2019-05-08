@@ -3,10 +3,21 @@
 #include <vector>
 
 /**
+ * A C-string containing the horizontal whitespace characters.
+ */
+extern const char *WHITESPACE;
+
+/**
  * Return whether the character is whitespace (space or tab).
- * Only inline whitespace is considered. (\n is *not* considered whitespace.)
+ * Only horizontal whitespace is considered. (\n is *not* considered
+ * whitespace.)
  */
 bool isWhitespace(char c);
+
+/**
+ * Trim whitespace from the beginning and end of a string in-place.
+ */
+void trimWhitespace(std::string &s);
 
 /**
  * Split a string around whitespace.
