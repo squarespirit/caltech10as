@@ -11,7 +11,7 @@ DATATYPES_OBJS = $(addprefix datatypes/, \
 DATATYPES_TEST_OBJS = $(addprefix datatypes/, \
 	IncDecRegisterTest.o NameTest.o NumberTest.o SymbolTest.o WhitespaceTest.o)
 EXCEPTION_OBJS = $(addprefix exceptions/, \
-	NameExn.o ParseExn.o RangeExn.o)
+	AssemblyExn.o IncludeLoopExn.o NameExn.o ParseExn.o RangeExn.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o Line.o Operation.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o LineTest.o OperationTest.o)
 LINE_MNEMONICS_OBJS = $(addprefix line/mnemonics/, \
