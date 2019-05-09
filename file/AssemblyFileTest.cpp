@@ -3,6 +3,7 @@
 #include "test/catch.hpp"
 #include <cstdlib>
 #include <unistd.h>
+#include "FileUtil.hpp"
 
 char const *TEST_FILE = R"(
 label1:
@@ -70,18 +71,15 @@ TEST_CASE("Test AssemblyFile FirstPass include") {
     char tempDir[] = "tmp/dirXXXXXX";
     REQUIRE(mkdtemp(tempDir) != nullptr);
 
-    std::string rootFile = std::string(tempDir) + "/root.asm";
-    std::string child1File = std::string(tempDir) + "/child1.asm";
-    std::string child2File = std::string(tempDir) + "/child2.asm";
+    std::string rootFile = joinPaths(tempDir, "root.asm");
+    std::string child1File = joinPaths(tempDir, "child1.asm");
+    std::string child2File = joinPaths(tempDir, "child2.asm");
 
     // Write files
     {
-        std::ofstream root(rootFile);
-        root << TEST_FILE_ROOT;
-        std::ofstream child1(child1File);
-        child1 << TEST_FILE_CHILD1;
-        std::ofstream child2(child2File);
-        child2 << TEST_FILE_CHILD2;
+        std::ofstream(rootFile) << TEST_FILE_ROOT;
+        std::ofstream(child1File) << TEST_FILE_CHILD1;
+        std::ofstream(child2File) << TEST_FILE_CHILD2;
         // All files go out of scope and are closed
     }
 
@@ -105,3 +103,44 @@ TEST_CASE("Test AssemblyFile FirstPass include") {
     REQUIRE(c.lookupLabel(Name("root_label2")) == Number(0x12));
     REQUIRE(c.lookupConstant(Name("child2_const")) == Number(0x22));
 }
+
+
+char const *TEST_FILE_LOOP1 = R"(
+    CALL label
+    .include loop2.asm
+)";
+
+char const *TEST_FILE_LOOP2 = R"(
+    .const hello 1
+    .include loop1.asm
+)";
+
+TEST_CASE("Test AssemblyFile include loop") {
+    // Make temp directory
+    char tempDir[] = "tmp/dirXXXXXX";
+    REQUIRE(mkdtemp(tempDir) != nullptr);
+
+    std::string loop1File = joinPaths(tempDir, "loop1.asm");
+    std::string loop2File = joinPaths(tempDir, "loop2.asm");
+
+    // Write files
+    {
+        std::ofstream(loop1File) << TEST_FILE_LOOP1;
+        std::ofstream(loop2File) << TEST_FILE_LOOP2;
+        // All files go out of scope and are closed
+    }
+
+    // Read file
+    Context c;
+    FirstPass firstPass(c);
+    AssemblyFile assemblyFile(loop1File);
+    REQUIRE(assemblyFile.doPass(firstPass) == 1);
+    // Unfortunately, we aren't able to check why the FilePass failed,
+    // i.e. we are not able to check stderr
+
+    // The files are no longer needed
+    REQUIRE(remove(loop1File.c_str()) == 0);
+    REQUIRE(remove(loop2File.c_str()) == 0);
+    REQUIRE(rmdir(tempDir) == 0);
+}
+

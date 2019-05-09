@@ -35,3 +35,8 @@ TEST_CASE("Test equivalentPaths") {
         REQUIRE_THROWS_AS(equivalentPaths(c.first, c.second), FileExn);
     }
 }
+
+TEST_CASE("Test joinPaths") {
+    REQUIRE(joinPaths("aaa/bbb", "/ccc/ddd") == "/ccc/ddd");
+    REQUIRE(joinPaths("a/b", "c") == "a/b/c");
+}
