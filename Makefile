@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-g -I. -Wall -Werror -std=c++17
 LDFLAGS=-g
-EXECS=TestMain
+EXECS=caltech10as TestMain
 
 CONTEXT_OBJS = context/Context.o
 CONTEXT_TEST_OBJS = context/ContextTest.o
@@ -12,7 +12,8 @@ DATATYPES_TEST_OBJS = $(addprefix datatypes/, \
 	IncDecRegisterTest.o NameTest.o NumberTest.o SymbolTest.o WhitespaceTest.o)
 EXCEPTION_OBJS = $(addprefix exceptions/, \
 	AssemblyExn.o FileExn.o IncludeLoopExn.o NameExn.o ParseExn.o RangeExn.o)
-FILE_OBJS = $(addprefix file/, AssemblyFile.o FirstPass.o FileUtil.o)
+FILE_OBJS = $(addprefix file/, AssemblyFile.o FirstPass.o FileUtil.o \
+	ListingFile.o ObjectFile.o SecondPass.o)
 FILE_TEST_OBJS = $(addprefix file/, AssemblyFileTest.o FileUtilTest.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o Line.o Operation.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o LineTest.o OperationTest.o)
@@ -30,13 +31,14 @@ LINE_PSEUDOOPS_OBJS = $(addprefix line/pseudoops/, \
 LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, \
 	ByteOpTest.o ConstOpTest.o DataOpTest.o IncludeOpTest.o \
 	OrgOpTest.o PseudoOpTest.o SymbolOpTest.o)
-TEST_MAIN_OBJS = test/TestMain.o
+
+MAIN_OBJ = main/Main.o
+TEST_MAIN_OBJ = test/TestMain.o
 
 ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) \
 	$(FILE_OBJS) $(LINE_OBJS) $(LINE_MNEMONICS_OBJS) $(LINE_PSEUDOOPS_OBJS)
 ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(FILE_TEST_OBJS) \
-	$(LINE_TEST_OBJS) $(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) \
-	$(TEST_MAIN_OBJS)
+	$(LINE_TEST_OBJS) $(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS)
 
 .PHONY: all clean clean-libs cloc fmt lint test
 
@@ -44,7 +46,10 @@ all: $(EXECS)
 
 # Use implicit .cpp -> .o rule to compile all .o files
 
-TestMain: $(ALL_BUILD_OBJS) $(ALL_TEST_OBJS)
+caltech10as: $(ALL_BUILD_OBJS) $(MAIN_OBJ)
+	$(CXX) $(LDFLAGS) -o $@ $^
+
+TestMain: $(ALL_BUILD_OBJS) $(ALL_TEST_OBJS) $(TEST_MAIN_OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^
 
 test: TestMain
