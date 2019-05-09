@@ -1,9 +1,11 @@
 #include "AssemblyFile.hpp"
+#include "FileUtil.hpp"
 #include "FirstPass.hpp"
 #include "test/catch.hpp"
 #include <cstdlib>
+#include <iostream>
+#include <sstream>
 #include <unistd.h>
-#include "FileUtil.hpp"
 
 char const *TEST_FILE = R"(
 label1:
@@ -104,6 +106,18 @@ TEST_CASE("Test AssemblyFile FirstPass include") {
     REQUIRE(c.lookupConstant(Name("child2_const")) == Number(0x22));
 }
 
+/**
+ * Short guard class that redirects stderr, and resets the buffer when
+ * destroyed.
+ */
+class CErrRedirect {
+public:
+    CErrRedirect(std::streambuf *newBuf) : oldBuf(std::cerr.rdbuf(newBuf)) {}
+    ~CErrRedirect() { std::cerr.rdbuf(oldBuf); }
+
+private:
+    std::streambuf *oldBuf;
+};
 
 char const *TEST_FILE_LOOP1 = R"(
     CALL label
@@ -130,17 +144,25 @@ TEST_CASE("Test AssemblyFile include loop") {
         // All files go out of scope and are closed
     }
 
+    // Capture stderr
+    std::stringstream errCapture;
+    CErrRedirect errRedirect(errCapture.rdbuf());
+
     // Read file
     Context c;
     FirstPass firstPass(c);
     AssemblyFile assemblyFile(loop1File);
     REQUIRE(assemblyFile.doPass(firstPass) == 1);
-    // Unfortunately, we aren't able to check why the FilePass failed,
-    // i.e. we are not able to check stderr
 
     // The files are no longer needed
     REQUIRE(remove(loop1File.c_str()) == 0);
     REQUIRE(remove(loop2File.c_str()) == 0);
     REQUIRE(rmdir(tempDir) == 0);
-}
 
+    // Check stderr message
+    // "." cannot match a newline, so \\S\\s (whitespace or non-whitespace)
+    // is used to match any character
+    REQUIRE_THAT(errCapture.str(),
+                 Catch::Matches("[\\S\\s]*Including this file forms a "
+                                "cycle:.*loop1\\.asm[\\S\\s]*"));
+}

@@ -26,7 +26,8 @@ int AssemblyFile::doPassRec(FilePass &filePass,
     // Check if this file is previously included
     for (auto const &prevPath : includes) {
         if (equivalentPaths(prevPath, filename)) {
-            throw IncludeLoopExn("Including this file forms a cycle: " + filename);
+            throw IncludeLoopExn("Including this file forms a cycle: " +
+                                 filename);
         }
     }
 
