@@ -1,0 +1,48 @@
+                    ; Constants
+                    .const a 00     ; However, a is immediately loaded into the accumulator
+                    .const b 01
+
+                    ; Euclid's algorithm doesn't work if either a or b is zero.
+                    ; So we have to check these cases.
+0000    8000        LDD $a          ; If a == 0, go to ReturnZero
+0001    3300        CMPI 0
+0002    9F06        JE ReturnZero   ; (Don't need NOP, next load is harmless)
+0003    8001        LDD $b          ; If b == 0, go to ReturnZero
+0004    3300        CMPI 0
+0005    9F03        JE ReturnZero   ; (Don't need NOP, next load is harmless)
+                    ; Neither a nor b are zero. Go to main algorithm.
+0006    8000        LDD $a          ; Main loop assumes that a is in acc
+0007    C00B        JMP EuclidLoop
+0008    1F80        NOP
+                ReturnZero:
+0009    8900        LDI 0           ; Return zero in acc
+000A    1F00        RTS
+
+                EuclidLoop:
+                SubLoop:            ; While acc >= b, acc -= b
+000B    3001        CMP $b          ; If acc < b, go to end of loop
+000C    8F04        JB SubLoopEnd
+000D    1F80        NOP
+000E    1001        SUB $b
+000F    C00B        JMP SubLoop
+0010    1F80        NOP
+                SubLoopEnd:
+0011    3300        CMPI 0          ; If acc != 0...
+                    ; We will branch later on this.
+                    ; The algorithm says to check "if b != 0" after swapping 
+                    ; acc and b, but we cannot compare b with an immediate
+                    ; value, so it is easiest to check the acc now.
+                    ; The following LD/STs don't change the flags.
+
+                    ; Swap b and acc by doing this:
+0012    A002        STD 2           ; Move acc to 02
+0013    8001        LDD $b          ; Move b to 03
+0014    A003        STD 3
+0015    8002        LDD 2           ; Move 02 to b
+0016    A001        STD $b
+0017    8003        LDD 3           ; Move 03 to acc
+
+0018    9CF2        JNE EuclidLoop  ; The destination address is 100 - E = F2
+0019    1F80        NOP
+
+001A    1F00        RTS
