@@ -17,7 +17,7 @@ void ListingFile::writeLine(std::string const &source) {
 void ListingFile::writeLine(number_t programAddress, uint16_t code,
                             std::string const &source) {
     // Write program address
-    out << std::setfill('0') << std::setw(4) << std::hex << std::uppercase 
+    out << std::setfill('0') << std::setw(4) << std::hex << std::uppercase
         << programAddress;
     // Write code
     out << std::string(4, ' ') << code;

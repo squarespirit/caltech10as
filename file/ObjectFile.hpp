@@ -10,7 +10,7 @@ public:
     /**
      * Create object file, given its filename.
      */
-    ObjectFile(std::string const &filename);
+    explicit ObjectFile(std::string const &filename);
 
     /**
      * Write this word of machine code to the object file.

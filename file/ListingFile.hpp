@@ -12,7 +12,7 @@ public:
     /**
      * Create listing file object, given its filename.
      */
-    ListingFile(std::string const &filename);
+    explicit ListingFile(std::string const &filename);
 
     /**
      * Add a line to the listing file that corresponds to the given line of
