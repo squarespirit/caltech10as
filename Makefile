@@ -52,8 +52,9 @@ caltech10as: $(ALL_BUILD_OBJS) $(MAIN_OBJ)
 TestMain: $(ALL_BUILD_OBJS) $(ALL_TEST_OBJS) $(TEST_MAIN_OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^
 
-test: TestMain
+test: $(EXECS)
 	./TestMain
+	cd e2e; ./e2etest.sh
 
 cloc:
 	cloc --not-match-f=catch.hpp --exclude-dir=.vscode .
