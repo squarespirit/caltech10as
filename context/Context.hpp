@@ -50,6 +50,13 @@ public:
      */
     void setCurDataAddress(number_t);
 
+    /**
+     * Return if the two Contexts are equal.
+     * That is, their program address, data address, set of labels, and set
+     * of constants are the same.
+     */
+    bool operator==(const Context &) const;
+
 private:
     std::unordered_map<Name, Number> labelMap;
     std::unordered_map<Name, Number> constantMap;

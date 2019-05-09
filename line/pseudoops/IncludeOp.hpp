@@ -21,7 +21,7 @@ public:
      */
     void apply(Context &c) const override;
 
-    std::string const &getFilename();
+    std::string const &getFilename() const;
 
     /**
      * Convert the given opcode and operands to a IncludeOp.

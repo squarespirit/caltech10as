@@ -30,20 +30,20 @@ public:
     static Line parse(std::string const &);
 
     /** Return whether this line has a label. */
-    bool hasLabel();
+    bool hasLabel() const;
 
     /** Get the line's label. Throw an error if it does not have a label. */
-    LabelDef const &getLabel();
+    LabelDef const &getLabel() const;
 
     /** Return whether this line has an operation. */
-    bool hasOperation();
+    bool hasOperation() const;
 
     /**
      * Get the line's operation. The Line owns the operation, so the reference
      * will become invalid when the Line is destroyed.
      * Throw an error if the Line does not have an operation.
      */
-    Operation const &getOperation();
+    Operation const &getOperation() const;
 
 private:
     std::optional<LabelDef> label;

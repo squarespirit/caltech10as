@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "AssemblyExn.hpp"
+#include <string>
 
 /**
  * ParseExn is an exception thrown when failing to convert a string to an

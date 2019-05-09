@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "AssemblyExn.hpp"
+#include <string>
 
 /**
  * NameExn is thrown when a name does not exist, or one attempts to define

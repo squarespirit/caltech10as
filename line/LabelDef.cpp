@@ -15,7 +15,7 @@ LabelDef LabelDef::parse(std::string s) {
     return LabelDef(Name(s.substr(0, s.length() - 1)));
 }
 
-void LabelDef::apply(Context &c) {
+void LabelDef::apply(Context &c) const {
     c.addLabel(name, Number(c.getCurProgramAddress()));
 }
 

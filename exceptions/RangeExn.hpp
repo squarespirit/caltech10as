@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "AssemblyExn.hpp"
+#include <string>
 
 /**
  * RangeExn is an exception thrown when a number (address or data value) is

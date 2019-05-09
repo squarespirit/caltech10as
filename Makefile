@@ -11,7 +11,9 @@ DATATYPES_OBJS = $(addprefix datatypes/, \
 DATATYPES_TEST_OBJS = $(addprefix datatypes/, \
 	IncDecRegisterTest.o NameTest.o NumberTest.o SymbolTest.o WhitespaceTest.o)
 EXCEPTION_OBJS = $(addprefix exceptions/, \
-	AssemblyExn.o IncludeLoopExn.o NameExn.o ParseExn.o RangeExn.o)
+	AssemblyExn.o FileExn.o IncludeLoopExn.o NameExn.o ParseExn.o RangeExn.o)
+FILE_OBJS = $(addprefix file/, AssemblyFile.o FirstPass.o FileUtil.o)
+FILE_TEST_OBJS = $(addprefix file/, AssemblyFileTest.o FileUtilTest.o)
 LINE_OBJS = $(addprefix line/, LabelDef.o Line.o Operation.o)
 LINE_TEST_OBJS = $(addprefix line/, LabelDefTest.o LineTest.o OperationTest.o)
 LINE_MNEMONICS_OBJS = $(addprefix line/mnemonics/, \
@@ -31,9 +33,10 @@ LINE_PSEUDOOPS_TEST_OBJS = $(addprefix line/pseudoops/, \
 TEST_MAIN_OBJS = test/TestMain.o
 
 ALL_BUILD_OBJS = $(CONTEXT_OBJS) $(DATATYPES_OBJS) $(EXCEPTION_OBJS) \
-	$(LINE_OBJS) $(LINE_MNEMONICS_OBJS) $(LINE_PSEUDOOPS_OBJS)
-ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(LINE_TEST_OBJS) \
-	$(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) $(TEST_MAIN_OBJS)
+	$(FILE_OBJS) $(LINE_OBJS) $(LINE_MNEMONICS_OBJS) $(LINE_PSEUDOOPS_OBJS)
+ALL_TEST_OBJS = $(CONTEXT_TEST_OBJS) $(DATATYPES_TEST_OBJS) $(FILE_TEST_OBJS) \
+	$(LINE_TEST_OBJS) $(LINE_MNEMONICS_TEST_OBJS) $(LINE_PSEUDOOPS_TEST_OBJS) \
+	$(TEST_MAIN_OBJS)
 
 .PHONY: all clean clean-libs cloc fmt lint test
 

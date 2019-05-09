@@ -24,7 +24,7 @@ public:
      * Apply this label definition to the given Context. Add a map of this
      * label name -> current address.
      */
-    void apply(Context &);
+    void apply(Context &) const;
 
     bool operator==(const LabelDef &) const;
 

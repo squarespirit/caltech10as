@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "AssemblyExn.hpp"
+#include <string>
 
 /**
  * IncludeLoopExn is thrown when there is a loop of file inclusions.

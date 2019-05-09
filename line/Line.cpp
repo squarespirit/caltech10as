@@ -34,10 +34,10 @@ Line Line::parse(std::string const &line) {
     return Line(label, std::move(operation));
 }
 
-bool Line::hasLabel() { return bool(label); }
+bool Line::hasLabel() const { return bool(label); }
 
-LabelDef const &Line::getLabel() { return *label; }
+LabelDef const &Line::getLabel() const { return *label; }
 
-bool Line::hasOperation() { return bool(operation); }
+bool Line::hasOperation() const { return bool(operation); }
 
-Operation const &Line::getOperation() { return *(*operation); }
+Operation const &Line::getOperation() const { return *(*operation); }

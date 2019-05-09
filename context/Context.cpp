@@ -51,3 +51,9 @@ void Context::setCurDataAddress(number_t d) {
     }
     curDataAddress = d;
 }
+
+bool Context::operator==(const Context &other) const {
+    return labelMap == other.labelMap && constantMap == other.constantMap &&
+           curProgramAddress == other.curProgramAddress &&
+           curDataAddress == other.curDataAddress;
+}
