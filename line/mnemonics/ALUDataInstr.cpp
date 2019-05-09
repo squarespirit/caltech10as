@@ -46,7 +46,7 @@ ALUDataInstr::parseOp(std::string const &opcode,
         Symbol::parse(operand.substr(commaIndex + 1)));
 }
 
-uint16_t ALUDataInstr::encode(Context const &c) {
+uint16_t ALUDataInstr::encode(Context const &c) const {
     uint8_t addressMode = 0; // Direct addressing
     if (bool(reg)) {
         if (reg->getIsX()) {

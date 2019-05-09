@@ -17,23 +17,23 @@ public:
     /**
      * Get register.
      */
-    Register const &getRegister();
+    Register const &getRegister() const;
     /**
      * Return whether this IncDecRegister has increment/decrement.
      */
-    bool hasIncDec();
+    bool hasIncDec() const;
     /**
      * If the register should be incremented/decremented, return whether
      * it is decremented.
      * Throw an error if the register is not incremented/decremented.
      */
-    bool getIsDec();
+    bool getIsDec() const;
     /**
      * If the register should be incremented/decremented, return whether
      * it is a post-increment/decrement.
      * Throw an error if the register is not incremented/decremented.
      */
-    bool getIsPost();
+    bool getIsPost() const;
 
     /**
      * Convert a string to an IncDecRegister.

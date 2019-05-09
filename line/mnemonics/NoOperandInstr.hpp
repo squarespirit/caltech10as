@@ -26,7 +26,7 @@ public:
     /**
      * Return the machine code of this NoOperandInstr.
      */
-    uint16_t encode(Context const &c);
+    uint16_t encode(Context const &c) const;
 
     // Inherit operator==
 };

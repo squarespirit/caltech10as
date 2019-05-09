@@ -28,7 +28,7 @@ bool ImmediateInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-uint16_t ImmediateInstr::encode(Context const &c) {
+uint16_t ImmediateInstr::encode(Context const &c) const {
     number_t value = dataValue.resolve(c);
     if (value >= DATA_VALUE_SIZE) {
         throw RangeExn("Data value " + toHexString(value) + " out of range");

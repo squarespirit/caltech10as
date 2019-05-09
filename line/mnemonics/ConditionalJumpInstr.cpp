@@ -18,7 +18,7 @@ bool ConditionalJumpInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-uint16_t ConditionalJumpInstr::encode(Context const &c) {
+uint16_t ConditionalJumpInstr::encode(Context const &c) const {
     // Derivation:
     // new = old + r + 1
     // r = new - old - 1

@@ -39,7 +39,7 @@ public:
      * Return the machine code of this ALUDataInstr.
      * Throw a RangeExn if the data address/offset is out of range.
      */
-    uint16_t encode(Context const &c);
+    uint16_t encode(Context const &c) const;
 
     bool operator==(ALUDataInstr const &) const;
 

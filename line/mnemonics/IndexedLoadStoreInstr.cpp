@@ -40,7 +40,7 @@ IndexedLoadStoreInstr::parseOp(std::string const &opcode,
         Symbol::parse(operand.substr(commaIndex + 1)));
 }
 
-uint16_t IndexedLoadStoreInstr::encode(Context const &c) {
+uint16_t IndexedLoadStoreInstr::encode(Context const &c) const {
     // isPost and isDec bits
     // Note: for LD/ST without increment/decrement, these two bits are 10.
     uint8_t incDecBits = 0b10;

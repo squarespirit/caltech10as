@@ -23,7 +23,7 @@ public:
      * Throw RangeExn if the label is out of range.
      * (Should not happen for user-defined labels).
      */
-    uint16_t encode(Context const &c);
+    uint16_t encode(Context const &c) const;
 
     bool operator==(const UnconditionalJumpInstr &other) const;
 

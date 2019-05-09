@@ -21,7 +21,7 @@ public:
      * Return the machine code of this DirectInstr.
      * Throw a RangeExn if the data address is out of range.
      */
-    uint16_t encode(Context const &c);
+    uint16_t encode(Context const &c) const;
 
     bool operator==(DirectInstr const &) const;
 

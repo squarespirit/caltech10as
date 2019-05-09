@@ -20,7 +20,7 @@ bool DirectInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-uint16_t DirectInstr::encode(Context const &c) {
+uint16_t DirectInstr::encode(Context const &c) const {
     number_t address = dataAddress.resolve(c);
     if (address >= DATA_ADDRESS_SIZE) {
         throw RangeExn("Data address " + toHexString(address) +

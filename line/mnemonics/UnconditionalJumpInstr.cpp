@@ -16,7 +16,7 @@ bool UnconditionalJumpInstr::isValidOpcode(std::string const &opcode) {
     return codeMap.find(opcode) != codeMap.end();
 }
 
-uint16_t UnconditionalJumpInstr::encode(Context const &c) {
+uint16_t UnconditionalJumpInstr::encode(Context const &c) const {
     number_t address = c.lookupLabel(label).getNumber();
     if (address >= PROGRAM_ADDRESS_SIZE) {
         throw RangeExn("Label address " + toHexString(address) +

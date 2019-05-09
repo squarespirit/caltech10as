@@ -8,18 +8,18 @@ IncDecRegister::IncDecRegister(Register reg)
 IncDecRegister::IncDecRegister(Register reg, bool isDec, bool isPost)
     : reg(reg), incDec(true), isDec(isDec), isPost(isPost) {}
 
-Register const &IncDecRegister::getRegister() { return reg; }
+Register const &IncDecRegister::getRegister() const { return reg; }
 
-bool IncDecRegister::hasIncDec() { return incDec; }
+bool IncDecRegister::hasIncDec() const { return incDec; }
 
-bool IncDecRegister::getIsDec() {
+bool IncDecRegister::getIsDec() const {
     if (!incDec) {
         throw std::logic_error("Register is not incremented/decremented");
     }
     return isDec;
 }
 
-bool IncDecRegister::getIsPost() {
+bool IncDecRegister::getIsPost() const {
     if (!incDec) {
         throw std::logic_error("Register is not incremented/decremented");
     }

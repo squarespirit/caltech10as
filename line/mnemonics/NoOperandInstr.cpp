@@ -66,6 +66,6 @@ NoOperandInstr::parseOp(std::string const &opcode,
     return std::make_unique<NoOperandInstr>(opcode);
 }
 
-uint16_t NoOperandInstr::encode(Context const &c) {
+uint16_t NoOperandInstr::encode(Context const &c) const {
     return codeMap.at(getOpcode());
 }

@@ -36,7 +36,7 @@ public:
      * Convert this instruction into machine code.
      * Throw RangeExn if the offset is too large.
      */
-    uint16_t encode(Context const &c) override;
+    uint16_t encode(Context const &c) const override;
 
     bool operator==(const IndexedLoadStoreInstr &) const;
 

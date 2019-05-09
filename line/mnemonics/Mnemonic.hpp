@@ -28,7 +28,7 @@ public:
     /**
      * Convert this mnemonic to machine code.
      */
-    virtual uint16_t encode(Context const &c) = 0;
+    virtual uint16_t encode(Context const &c) const = 0;
 
     /**
      * Return true if their opcodes are equal.
@@ -38,7 +38,7 @@ public:
     /**
      * Get the mnemonic's opcode.
      */
-    std::string getOpcode();
+    std::string getOpcode() const;
 
 private:
     std::string opcode;
